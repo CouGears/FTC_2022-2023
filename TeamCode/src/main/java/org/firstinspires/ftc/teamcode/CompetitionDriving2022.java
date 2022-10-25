@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
 @TeleOp
 //Hi Oran
-public class CompetitionDriving2021 extends LinearOpMode {
+public class CompetitionDriving2022 extends LinearOpMode {
 
     private DcMotor motorBR, motorBL, motorFL, motorFR, intake, lifter, carousel, capDrive;
     private Servo bucket, intakeServo, liftyThingy;//, hServo, vServo;
