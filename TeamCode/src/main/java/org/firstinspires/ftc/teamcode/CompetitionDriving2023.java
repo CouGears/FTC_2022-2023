@@ -70,9 +70,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 motorBR.setPower(-((this.gamepad1.right_stick_y) + (-this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.right_stick_x)));
                 motorFR.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.right_stick_x)));
             }
-            //endregion
 
-            //region switch drive mode
             if (gamepad1.y) {
 
             }
@@ -82,22 +80,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
             else {
 
             }
-            //endregion
 
-            //region intake code
-            int FLIntakePowerR = (int) gamepad1.right_trigger;
-            boolean FLIntakePowerL = gamepad1.left_bumper;
-
-            if (gamepad1.right_bumper) {
-
-            } else if (FLIntakePowerL) {
-
-            } else {
-
-            }
-            //endregion
-
-            //region lifter
             if (gamepad1.dpad_up)
             {
 
@@ -119,10 +102,13 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
             //region carousel mechanism
             if (gamepad1.dpad_left) {
-                telemetry.addData("speed", 0);
-                telemetry.update();
-            } else if (gamepad1.dpad_right) {
-            } else {
+
+            }
+            else if (gamepad1.dpad_right)
+            {
+
+            } else
+            {
 
             }
 
