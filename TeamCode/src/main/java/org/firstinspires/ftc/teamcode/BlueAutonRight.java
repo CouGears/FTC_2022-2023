@@ -39,7 +39,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous
 
-public class BlueAuton extends OpMode {
+public class BlueAutonRight extends OpMode {
 
     //TensorFlowVision vision = new TensorFlowVision();
 //   double rev = 383.6; //435 rpm motor
@@ -75,20 +75,22 @@ public class BlueAuton extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
-                robot.drive(0 * feet, 1*feet, .5);
+                robot.drive(2 * inch, 0*feet, .5);
                 robot.sleep(1500);
                 robot.counter++;
                 break;
             case 1:
-                robot.drive(1.5 * feet, 0*feet, .5);
+                robot.drive(0 * feet, -1*feet, .5);
                 robot.sleep(1500);
                 robot.counter++;
                 break;
             case 2:
                 //lift arm
+                robot.drive(2.8 * feet, 0*feet, .5);
                 robot.counter++;
                 break;
             case 3:
+                robot.turn(45);
                 //open claw
                 robot.counter++;
                 break;
