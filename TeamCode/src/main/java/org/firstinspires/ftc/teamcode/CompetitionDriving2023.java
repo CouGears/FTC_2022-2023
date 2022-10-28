@@ -13,11 +13,12 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 //Hi Oran
 public class CompetitionDriving2023 extends LinearOpMode {
 
-    private DcMotor motorBR, motorBL, motorFL, motorFR, lift;
+    private DcMotor motorBR, motorBL, motorFL, motorFR, lift, release;
     private Servo claw;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 0;
     double ticks = 1124; // ticks for cap motor; half rotation of arm
+
     @Override
     public void runOpMode() {
         //region hardware map
@@ -27,21 +28,27 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBR = hardwareMap.get(DcMotor.class, "motorBR");
         motorFR = hardwareMap.get(DcMotor.class, "motorFR");
         lift = hardwareMap.get(DcMotor.class, "lift");
+        release = hardwareMap.get(DcMotor.class, "release");
 
         claw = hardwareMap.get(Servo.class, "claw");
-
 
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
+        lift.setDirection(DcMotorSimple.Direction.FORWARD);
+        release.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -71,56 +78,73 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 motorFR.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.right_stick_x)));
             }
 
-            if (gamepad1.y) {
-
-            }
-            if (gamepad1.b || gamepad2.a) {
-
-            }
-            else {
-
-            }
-
             if (gamepad1.dpad_up)
             {
-
+                lift.setTargetPosition(100);
+                lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                lift.setPower(.6);
             }
-            else if (gamepad1.dpad_down) {
-
-            }
-            else if (gamepad2.dpad_up)
+            else if (gamepad1.dpad_down)
             {
+                lift.setTargetPosition(0);
+                lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                lift.setPower(.6);
+            }
+            else
+            {
+                lift.setPower(0);
+            }
+
+            if (gamepad1.right_trigger>.5)
+            {
+                release.setTargetPosition(100);
+                release.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                release.setPower(.6);
+            }
+            else if (gamepad1.left_trigger>.5)
+            {
+                release.setTargetPosition(0);
+                release.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                release.setPower(.6);
+            }
+            else
+            {
+                release.setPower(0);
+            }
+
+            if(gamepad1.right_bumper)
+            {
+                claw.setPosition(0);
+            }
+            else if(gamepad1.left_bumper)
+            {
+                claw.setPosition(1);
+            }
+
+
+            /*if (gamepad1.b || gamepad2.a) {
+
+            } else {
 
             }
-            else if (gamepad2.dpad_down) {
-
-            }
-            else {
-
-            }
-            //endregion
-
-            //region carousel mechanism
             if (gamepad1.dpad_left) {
 
-            }
-            else if (gamepad1.dpad_right)
-            {
+            } else if (gamepad1.dpad_right) {
 
-            } else
-            {
+            } else {
 
             }
 
             //region Real capping mechanism
             if (gamepad2.left_bumper) {
 
-            } else if ( gamepad2.left_trigger > .5) {
+            } else if (gamepad2.left_trigger > .5) {
 
             } else {
 
             }
-
+*/
         }
+
     }
 }
