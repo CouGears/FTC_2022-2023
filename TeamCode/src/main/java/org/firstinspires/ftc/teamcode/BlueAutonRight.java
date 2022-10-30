@@ -61,17 +61,16 @@ public class BlueAutonRight extends OpMode {
 
     }
 
-    @Override
+
     public void init_loop() {
 
     }
 
-    @Override
     public void start() {
         runtime.reset();
     }
 
-    @Override
+
     public void loop() {
         switch (robot.counter) {
             case 0:

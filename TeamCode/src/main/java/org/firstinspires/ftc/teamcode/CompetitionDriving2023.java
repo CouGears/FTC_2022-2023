@@ -47,8 +47,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
         lift.setDirection(DcMotorSimple.Direction.FORWARD);
         release.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        release.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -80,14 +79,10 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
             if (gamepad1.dpad_up)
             {
-                lift.setTargetPosition(100);
-                lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 lift.setPower(.6);
             }
             else if (gamepad1.dpad_down)
             {
-                lift.setTargetPosition(0);
-                lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 lift.setPower(.6);
             }
             else
