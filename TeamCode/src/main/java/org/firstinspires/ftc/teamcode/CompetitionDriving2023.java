@@ -17,7 +17,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
     private Servo claw;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 0;
-    double ticks = 1124; // ticks for cap motor; half rotation of arm
+
 
     @Override
     public void runOpMode() {
@@ -113,7 +113,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
             }
             else if(gamepad1.left_bumper)
             {
-                claw.setPosition(1);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
+                claw.setPosition(.1);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
             }
 
 
