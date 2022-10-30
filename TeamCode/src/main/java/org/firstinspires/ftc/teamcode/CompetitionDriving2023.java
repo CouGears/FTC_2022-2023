@@ -79,11 +79,11 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
             if (gamepad1.dpad_up)
             {
-                lift.setPower(.6);
+                lift.setPower(.6);//may need to speed up or slow down
             }
             else if (gamepad1.dpad_down)
             {
-                lift.setPower(.6);
+                lift.setPower(-.6);//may need speed up or slow down
             }
             else
             {
@@ -92,15 +92,15 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
             if (gamepad1.right_trigger>.5)
             {
-                release.setTargetPosition(100);
+                release.setTargetPosition(100);//change this to make encoder make sense
                 release.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                release.setPower(.6);
+                release.setPower(.6);//may need to change power
             }
             else if (gamepad1.left_trigger>.5)
             {
                 release.setTargetPosition(0);
                 release.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                release.setPower(.6);
+                release.setPower(.6);//may need to change power
             }
             else
             {
@@ -109,11 +109,11 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
             if(gamepad1.right_bumper)
             {
-                claw.setPosition(0);
+                claw.setPosition(0);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
             }
             else if(gamepad1.left_bumper)
             {
-                claw.setPosition(1);
+                claw.setPosition(1);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
             }
 
 
