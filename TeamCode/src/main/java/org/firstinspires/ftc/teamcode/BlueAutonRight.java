@@ -74,34 +74,7 @@ public class BlueAutonRight extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
-                robot.drive(2 * inch, 0*feet, .5);
-                robot.sleep(1500);
-                robot.counter++;
-                break;
-            case 1:
-                robot.drive(0 * feet, -1*feet, .5);
-                robot.sleep(1500);
-                robot.counter++;
-                break;
-            case 2:
-                //lift arm
-                robot.drive(2.8 * feet, 0*feet, .5);
-                robot.counter++;
-                break;
-            case 3:
-                robot.turn(45);
-                //open claw
-                robot.counter++;
-                break;
-            case 4:
-                robot.drive(0 * feet, -1 * feet, .5); //moves back to middle
-                robot.newSleep(1000);
-                robot.counter++;
-                break;
-            case 5:
-                robot.drive(-1.5 * feet, 0 * feet, .5); //mave back to wall
-                //needs three to be in right position and avoid carousel
-
+              robot.setRelease(1000);
                 robot.counter++;
                 break;
         }
