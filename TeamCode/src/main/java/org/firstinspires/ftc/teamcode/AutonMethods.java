@@ -154,6 +154,34 @@ public class AutonMethods {
 
         speed(speed);
     }
+
+    public void drive2023gears(double forward, double sideways, double speed) {
+        runtime.reset();
+        while (motorFR.isBusy() || motorFL.isBusy()) {
+            if (runtime.seconds() > 2) break;
+        }
+        motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        FRtpos = forward - sideways;
+        BRtpos = forward + sideways;
+        FLtpos = forward - sideways;
+        BLtpos = forward + sideways;
+
+        motorFL.setTargetPosition(-(int) FLtpos);
+        motorBL.setTargetPosition(((int) BLtpos)/2);
+        motorFR.setTargetPosition(-(int) FRtpos);
+        motorBR.setTargetPosition(((int) BRtpos)/2);
+
+        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        speed(speed);
+    }
     //circumscribed robot has a diameter of 21 inches
     public void turn(double deg) {
         while (motorFR.isBusy() || motorFL.isBusy()) {
