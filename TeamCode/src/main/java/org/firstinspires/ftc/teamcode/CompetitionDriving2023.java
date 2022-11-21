@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 public class CompetitionDriving2023 extends LinearOpMode {
 
     private DcMotor motorBR, motorBL, motorFL, motorFR, lift, release;
-    private Servo claw;
+    private Servo claw, clawLift;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -31,6 +31,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
         release = hardwareMap.get(DcMotor.class, "release");
 
         claw = hardwareMap.get(Servo.class, "claw");
+        clawLift = hardwareMap.get(Servo.class, "clawLift");
 
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -54,7 +55,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         waitForStart();
 
-
+        clawLift.setPosition(.5);
         while (opModeIsActive()) {
 
             //region drive code
