@@ -28,11 +28,11 @@ public class AutonMethods {
     double inch2 = rev2 / (2 * 3.14);
     double feet2 = inch2 * 12;
     double FRtpos, BRtpos, FLtpos, BLtpos;
-    public static DcMotor motorBR, motorBL, motorFL, motorFR;
+    public static DcMotor motorBR, motorBL, motorFL, motorFR, release;
     //public static DcMotor Forwards = intake, Sideways = carousel;
-    public static Servo servo;
+    //public static Servo servo;
     public static DistanceSensor distanceSensor, distanceSensorBack;
-    public static LED red, green, red2, green2;
+   // public static LED red, green, red2, green2;
     public TouchSensor armTouch;
     private final ElapsedTime runtime = new ElapsedTime();
     HardwareMap map;
@@ -53,24 +53,28 @@ public class AutonMethods {
         motorBL = map.get(DcMotor.class, "motorBL");
         motorBR = map.get(DcMotor.class, "motorBR");
         motorFR = map.get(DcMotor.class, "motorFR");
+        release = map.get(DcMotor.class, "release");
 
-        red = map.get(LED.class, "red");
+       /* red = map.get(LED.class, "red");
         green = map.get(LED.class, "green");
         red2 = map.get(LED.class, "red2");
-        green2 = map.get(LED.class, "green2");
+        green2 = map.get(LED.class, "green2");*/
 
-        servo = map.get(Servo.class, "servo");
+        //servo = map.get(Servo.class, "servo");
 
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
+        release.setDirection(DcMotorSimple.Direction.FORWARD);
+
 
         motorFL.setTargetPosition(0);
         motorBL.setTargetPosition(0);
@@ -95,6 +99,7 @@ public class AutonMethods {
     {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
+    /*
     public void setRed2()
     {
         green2.enable(false);
@@ -125,7 +130,7 @@ public class AutonMethods {
             red.enable(true);
             green.enable(true);
         }
-
+*/
     //Function to move the robot in any direction
     public void drive(double forward, double sideways, double speed) {
         runtime.reset();
@@ -214,7 +219,12 @@ public class AutonMethods {
         motorFR.setPower(spee);
         motorBR.setPower(spee);
     }
-
+public void setRelease(int x)
+{
+    motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    release.setTargetPosition(x);
+    motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+}
     public void newSleep(double timeinSeconds) {
         runtime.reset();
         while (runtime.seconds() < timeinSeconds);
