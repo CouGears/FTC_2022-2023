@@ -114,11 +114,11 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
             if(gamepad1.right_bumper)
             {
-                claw.setPosition(0);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
+                claw.setPosition(-1);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
             }
             else if(gamepad1.left_bumper)
             {
-                claw.setPosition(.1);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
+                claw.setPosition(1);//need to tune this it is a servo from 0-1 0 = 0 degrees 1 = 180
             }
 
             if (gamepad1.a)
