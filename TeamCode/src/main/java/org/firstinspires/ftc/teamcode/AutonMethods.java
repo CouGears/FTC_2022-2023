@@ -28,7 +28,7 @@ public class AutonMethods {
     double inch2 = rev2 / (2 * 3.14);
     double feet2 = inch2 * 12;
     double FRtpos, BRtpos, FLtpos, BLtpos;
-    public static DcMotor motorBR, motorBL, motorFL, motorFR, release;
+    public static DcMotor motorBR, motorBL, motorFL, motorFR;
     //public static DcMotor Forwards = intake, Sideways = carousel;
     //public static Servo servo;
     public static DistanceSensor distanceSensor, distanceSensorBack;
@@ -53,7 +53,7 @@ public class AutonMethods {
         motorBL = map.get(DcMotor.class, "motorBL");
         motorBR = map.get(DcMotor.class, "motorBR");
         motorFR = map.get(DcMotor.class, "motorFR");
-        release = map.get(DcMotor.class, "release");
+       // release = map.get(DcMotor.class, "release");
 
        /* red = map.get(LED.class, "red");
         green = map.get(LED.class, "green");
@@ -67,13 +67,13 @@ public class AutonMethods {
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+      //  release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
-        release.setDirection(DcMotorSimple.Direction.FORWARD);
+       // release.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         motorFL.setTargetPosition(0);
@@ -211,6 +211,29 @@ public class AutonMethods {
         motorBR.setPower(0.5);
 
     }
+    public void turn2023gears(double deg) {
+        while (motorFR.isBusy() || motorFL.isBusy()) {
+            if (runtime.seconds() > 2) break;
+        }
+        motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //for every drive function remember to reset encoder
+        motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        double deltaturn = (deg / 360.0) * 21.654 * 3.14 * inch * 2.2;
+        motorFL.setTargetPosition(-(int) deltaturn);
+        motorBL.setTargetPosition((int) deltaturn/2);
+        motorFR.setTargetPosition((int) deltaturn);
+        motorBR.setTargetPosition(-(int) deltaturn/2);
+        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFL.setPower(0.5);
+        motorBL.setPower(0.5);
+        motorFR.setPower(0.5);
+        motorBR.setPower(0.5);
+
+    }
 
 
     public void speed(double spee) {
@@ -219,12 +242,12 @@ public class AutonMethods {
         motorFR.setPower(spee);
         motorBR.setPower(spee);
     }
-public void setRelease(int x)
+/*public void setRelease(int x)
 {
     motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     release.setTargetPosition(x);
     motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-}
+}*/
     public void newSleep(double timeinSeconds) {
         runtime.reset();
         while (runtime.seconds() < timeinSeconds);

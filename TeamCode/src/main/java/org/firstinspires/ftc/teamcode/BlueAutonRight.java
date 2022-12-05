@@ -46,6 +46,7 @@ public class BlueAutonRight extends OpMode {
     double rev = 537.7; //312 rpm motor
     double inch = rev / (3.78 * 3.14);
     double feet = inch * 12 + (10 * inch);
+    short sleevenum = 1;
 
     private ElapsedTime runtime = new ElapsedTime();
     AutonMethods robot = new AutonMethods();
@@ -72,18 +73,19 @@ public class BlueAutonRight extends OpMode {
 
 
     public void loop() {
-        switch (robot.counter) {
+        robot.turn2023gears(90);
+      /*  switch (robot.counter) {
             case 0:
                 //scan the sleeve
+
                 break;
             case 1:
-                robot.drive(0 * feet, -1.3*feet, .5);// test for value so close to pylons
-                robot.sleep(1500);
+                robot.drive2023gears(0 * feet, -1 *feet, .5);// test for value so close to pylons
                 robot.counter++;
                 break;
             case 2:
                 //lift arm
-                robot.drive(2.8 * feet, 0*feet, .5);//so cose
+                robot.drive2023gears(5 * feet, 0*feet, .5);
                 robot.counter++;
                 break;
             case 3:
@@ -92,14 +94,44 @@ public class BlueAutonRight extends OpMode {
                 robot.counter++;
                 break;
             case 4:
-
-                break;
-            case 5:
-
-
+                //LIFT GO UP
                 robot.counter++;
                 break;
+            case 5:
+                //Drop cone
+                robot.counter++;
+                break;
+            case 6:
+                //lift go down
+                robot.counter++;
+                break;
+            case 7:
+                switch (sleevenum){
+                    case 1:
+                        robot.turn(-45);
+                        robot.drive2023gears(0 * feet, -.3*feet, .5);
+                        break;
+                    case 2:
+                        robot.turn(-45);
+                        robot.drive2023gears(0 * feet, -.3*feet, .5);
+                        robot.drive2023gears(1 * feet, 0*feet, .5);
+                        robot.drive2023gears(0 * feet, 1.3*feet, .5);
+                        break;
+                    case 3:
+                        robot.turn(-45);
+                        robot.drive2023gears(0 * feet, -.3*feet, .5);
+                        robot.drive2023gears(1 * feet, 0*feet, .5);
+                        robot.drive2023gears(0 * feet, 1.3*feet, .5);
+                        robot.drive2023gears(0 * feet, 3.3*feet, .5);
+
+                }
+                robot.counter++;
+                break;
+
         }
+
+       */
+
     }
 
     /*
