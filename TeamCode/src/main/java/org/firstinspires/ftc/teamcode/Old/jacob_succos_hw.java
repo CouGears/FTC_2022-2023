@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 //can you do it with a name cause it wasn't working
-@TeleOp
+//@TeleOp
 public class jacob_succos_hw extends LinearOpMode {
 DcMotor motor1;
 

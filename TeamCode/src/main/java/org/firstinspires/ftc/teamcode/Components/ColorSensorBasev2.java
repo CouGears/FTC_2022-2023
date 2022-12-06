@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Components;
         import com.qualcomm.robotcore.hardware.ColorSensor;
         import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp
+//@TeleOp
 public class ColorSensorBasev2 extends LinearOpMode {
     // Define a variable for our color sensor
     ColorSensor color;

@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.AutonMethods;
 
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
-@TeleOp
+//@TeleOp
 //Hi Oran
 public class CompetitionDriving2021 extends LinearOpMode {
 

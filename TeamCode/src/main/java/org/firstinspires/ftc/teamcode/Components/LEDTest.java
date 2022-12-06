@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.LED;
 
 import org.firstinspires.ftc.teamcode.Odometry.OdometryMethods;
 
-@TeleOp
+//@TeleOp
 
 public class LEDTest extends LinearOpMode {
     public static LED red, green, red2, green2, red3, green3, red4, green4;

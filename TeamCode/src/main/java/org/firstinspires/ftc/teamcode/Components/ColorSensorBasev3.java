@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         import com.qualcomm.robotcore.hardware.ColorSensor;
         import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp
+//@TeleOp
 public class ColorSensorBasev3 extends LinearOpMode {
     // Define a variable for our color sensor
     public static ColorSensor color;
