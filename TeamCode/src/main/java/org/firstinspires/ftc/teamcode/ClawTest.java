@@ -30,11 +30,15 @@ public class ClawTest extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            if (gamepad1.right_bumper) {
-                claw.setPosition(1);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
-            } else {
-                claw.setPosition(-1);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
-            }
+            if(gamepad1.a)
+            {claw.setPosition(0);
+                telemetry.addData("Button" , "A");
+                telemetry.update();}
+            if(gamepad1.b)claw.setPosition(1);
+            if(gamepad1.x)claw.setPosition(-1);
+            if(gamepad1.y)claw.setPosition(0);
+            if(gamepad1.dpad_up)claw.setPosition(.5);
+            if(gamepad1.dpad_down)claw.setPosition(-.5);
         }
     }
 }
