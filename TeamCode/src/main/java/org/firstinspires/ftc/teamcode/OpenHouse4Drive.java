@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.*;
 
 
-@TeleOp
+//@TeleOp
+//uncomment line above to use
 public class OpenHouse4Drive extends LinearOpMode {
 
     private DcMotor motorBR, motorBL, motorFL, motorFR;

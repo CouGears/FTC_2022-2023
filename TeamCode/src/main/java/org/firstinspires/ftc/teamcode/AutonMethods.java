@@ -159,11 +159,13 @@ public class AutonMethods {
         speed(speed);
     }
 
-    public void drive2023gears(double forward, double sideways, double speed) {
+    public void drive2023(double forward, double sideways, double speed) {
         runtime.reset();
         while (motorFR.isBusy() || motorFL.isBusy()) {
             if (runtime.seconds() > 2) break;
         }
+        forward = (forward/2)-(6.5*inch);
+        sideways = (sideways/2)-(6.5*inch);
         motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -174,17 +176,17 @@ public class AutonMethods {
         FLtpos = forward - sideways;
         BLtpos = forward + sideways;
 
-        motorFL.setTargetPosition(-(int) FLtpos);
-        motorBL.setTargetPosition(((int) BLtpos)/2);
-        motorFR.setTargetPosition(-(int) FRtpos);
-        motorBR.setTargetPosition(((int) BRtpos)/2);
+        motorFL.setTargetPosition((-(int) FLtpos)*2);
+        motorBL.setTargetPosition(((int) BLtpos));
+        motorFR.setTargetPosition((((int) FRtpos))*2);
+        motorBR.setTargetPosition(-(int) BRtpos);
 
         motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        speed(speed);
+        speed2023(speed);
     }
     //circumscribed robot has a diameter of 21 inches
     public void turn(double deg) {
@@ -196,10 +198,7 @@ public class AutonMethods {
         motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         double deltaturn = (deg / 360.0) * 21.654 * 3.14 * inch * 2.2;
-        motorFL.setTargetPosition(-(int) deltaturn);
-        motorBL.setTargetPosition((int) deltaturn);
-        motorFR.setTargetPosition((int) deltaturn);
-        motorBR.setTargetPosition(-(int) deltaturn);
+
         motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -232,6 +231,12 @@ public class AutonMethods {
         motorFR.setPower(0.5);
         motorBR.setPower(0.5);
 
+    }
+    public void speed2023(double spee) {
+        motorFL.setPower(spee*2);
+        motorBL.setPower(spee);
+        motorFR.setPower(spee*2);
+        motorBR.setPower(spee);
     }
     public void speed(double spee) {
         motorFL.setPower(spee);

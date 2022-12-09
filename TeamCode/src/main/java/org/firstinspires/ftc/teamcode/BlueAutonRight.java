@@ -73,19 +73,19 @@ public class BlueAutonRight extends OpMode {
 
 
     public void loop() {
-        robot.turn2023gears(90);
-      /*  switch (robot.counter) {
+        switch (robot.counter) {
             case 0:
                 //scan the sleeve
-
-                break;
+                robot.drive2023(3*feet, 0*feet, .25);
+                robot.counter++;
+                break;/*
             case 1:
-                robot.drive2023gears(0 * feet, -1 *feet, .5);// test for value so close to pylons
+                robot.drive2023gears(0 * feet, -1 * feet, .5);// test for value so close to pylons
                 robot.counter++;
                 break;
             case 2:
                 //lift arm
-                robot.drive2023gears(5 * feet, 0*feet, .5);
+                robot.drive2023gears(5 * feet, 0 * feet, .5);
                 robot.counter++;
                 break;
             case 3:
@@ -106,40 +106,30 @@ public class BlueAutonRight extends OpMode {
                 robot.counter++;
                 break;
             case 7:
-                switch (sleevenum){
+                switch (sleevenum) {
                     case 1:
                         robot.turn(-45);
-                        robot.drive2023gears(0 * feet, -.3*feet, .5);
+                        robot.drive2023gears(0 * feet, -.3 * feet, .5);
                         break;
                     case 2:
                         robot.turn(-45);
-                        robot.drive2023gears(0 * feet, -.3*feet, .5);
-                        robot.drive2023gears(1 * feet, 0*feet, .5);
-                        robot.drive2023gears(0 * feet, 1.3*feet, .5);
+                        robot.drive2023gears(0 * feet, -.3 * feet, .5);
+                        robot.drive2023gears(1 * feet, 0 * feet, .5);
+                        robot.drive2023gears(0 * feet, 1.3 * feet, .5);
                         break;
                     case 3:
                         robot.turn(-45);
-                        robot.drive2023gears(0 * feet, -.3*feet, .5);
-                        robot.drive2023gears(1 * feet, 0*feet, .5);
-                        robot.drive2023gears(0 * feet, 1.3*feet, .5);
-                        robot.drive2023gears(0 * feet, 3.3*feet, .5);
+                        robot.drive2023gears(0 * feet, -.3 * feet, .5);
+                        robot.drive2023gears(1 * feet, 0 * feet, .5);
+                        robot.drive2023gears(0 * feet, 1.3 * feet, .5);
+                        robot.drive2023gears(0 * feet, 3.3 * feet, .5);
 
                 }
                 robot.counter++;
-                break;
+                break;*/
 
         }
-
-       */
-
     }
-
-    /*
-     * Code to run ONCE after the driver hits STOP
-     */
-    @Override
-    public void stop() {
-    }
-//test
 }
+
 
