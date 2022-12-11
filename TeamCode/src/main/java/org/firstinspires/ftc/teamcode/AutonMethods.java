@@ -30,7 +30,7 @@ public class AutonMethods {
     double FRtpos, BRtpos, FLtpos, BLtpos;
     public static DcMotor motorBR, motorBL, motorFL, motorFR;
     //public static DcMotor Forwards = intake, Sideways = carousel;
-    //public static Servo servo;
+    public static Servo claw;
     public static DistanceSensor distanceSensor, distanceSensorBack;
    // public static LED red, green, red2, green2;
     public TouchSensor armTouch;
@@ -60,7 +60,7 @@ public class AutonMethods {
         red2 = map.get(LED.class, "red2");
         green2 = map.get(LED.class, "green2");*/
 
-        //servo = map.get(Servo.class, "servo");
+        claw = map.get(Servo.class, "claw");
 
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -158,7 +158,10 @@ public class AutonMethods {
 
         speed(speed);
     }
-
+    public void clawsetpos(double a)
+    {
+        claw.setPosition(a);
+    }
     public void drive2023(double forward, double sideways, double speed) {
         runtime.reset();
         while (motorFR.isBusy() || motorFL.isBusy()) {

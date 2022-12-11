@@ -64,7 +64,7 @@ public class Auton extends OpMode {
 
 
     public void init_loop() {
-
+    robot.clawsetpos(0);
     }
 
     public void start() {
@@ -75,6 +75,7 @@ public class Auton extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
+                robot.clawsetpos(0);
                 //scan the sleeve
                 robot.drive2023(3*feet, 0*feet, .25);
                 robot.counter++;

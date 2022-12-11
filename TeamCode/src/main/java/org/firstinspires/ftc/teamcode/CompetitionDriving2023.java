@@ -27,18 +27,14 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBR = hardwareMap.get(DcMotor.class, "motorBR");
         motorFR = hardwareMap.get(DcMotor.class, "motorFR");
         lift = hardwareMap.get(DcMotor.class, "lift");
-
-
         claw = hardwareMap.get(Servo.class, "claw");
         clawLift = hardwareMap.get(Servo.class, "clawLift");
-
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -53,12 +49,14 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         waitForStart();
 
-        clawLift.setPosition(.5);
+       // clawLift.setPosition(.5);
         while (opModeIsActive()) {
-            if (gamepad1.right_bumper||gamepad2.right_bumper) {
-                claw.setPosition(0);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
-            } else if (gamepad1.left_bumper||gamepad1.right_bumper) {
+            if (gamepad1.right_bumper || gamepad2.right_bumper) {
                 claw.setPosition(.15);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
+            } /*else if (gamepad1.left_bumper||gamepad1.right_bumper) {
+                claw.setPosition(.15);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
+            }*/ else {
+                claw.setPosition(0);
             }
             //while(gamepad1.right_bumper||gamepad2.right_bumper)claw.setPosition(.15);
             //while(!(gamepad1.right_bumper||gamepad2.right_bumper))claw.setPosition(0);
