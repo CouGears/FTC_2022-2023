@@ -9,18 +9,18 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
-//@TeleOp
+@TeleOp
 //uncomment line above to use
 public class ClawTest extends LinearOpMode {
 
-    private Servo claw;
+    private Servo clawLift;
     private AutonMethods robot = new AutonMethods();
 
     @Override
     public void runOpMode() {
 
 
-        claw = hardwareMap.get(Servo.class, "claw");
+        clawLift = hardwareMap.get(Servo.class, "clawLift");
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -31,14 +31,25 @@ public class ClawTest extends LinearOpMode {
         while (opModeIsActive()) {
 
             if(gamepad1.a)
-            {claw.setPosition(0);
+            {clawLift.setPosition(0);
                 telemetry.addData("Button" , "A");
                 telemetry.update();}
-            if(gamepad1.b)claw.setPosition(1);
-            if(gamepad1.x)claw.setPosition(-1);
-            if(gamepad1.y)claw.setPosition(0);
-            if(gamepad1.dpad_up)claw.setPosition(.5);
-            if(gamepad1.dpad_down)claw.setPosition(-.5);
+            if(gamepad1.b)
+            {clawLift.setPosition(1);
+                telemetry.addData("Button" , "B");
+                telemetry.update();}
+            if(gamepad1.x)
+            {clawLift.setPosition(-1);
+                telemetry.addData("Button" , "Y");
+                telemetry.update();}
+            if(gamepad1.dpad_up)
+            {clawLift.setPosition(0.5);
+                telemetry.addData("Button" , "Up");
+                telemetry.update();}
+            if(gamepad1.dpad_down)
+            {clawLift.setPosition(-0.5);
+                telemetry.addData("Button" , "Down");
+                telemetry.update();}
         }
     }
 }

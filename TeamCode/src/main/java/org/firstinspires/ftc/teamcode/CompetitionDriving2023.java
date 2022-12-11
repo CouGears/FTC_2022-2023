@@ -55,13 +55,13 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         clawLift.setPosition(.5);
         while (opModeIsActive()) {
-           /* if (gamepad1.right_bumper||gamepad2.right_bumper) {
+            if (gamepad1.right_bumper||gamepad2.right_bumper) {
                 claw.setPosition(0);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
             } else if (gamepad1.left_bumper||gamepad1.right_bumper) {
                 claw.setPosition(.15);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
-            }*/
-            while(gamepad1.right_bumper||gamepad2.right_bumper)claw.setPosition(.15);
-            while(!(gamepad1.right_bumper||gamepad2.right_bumper))claw.setPosition(0);
+            }
+            //while(gamepad1.right_bumper||gamepad2.right_bumper)claw.setPosition(.15);
+            //while(!(gamepad1.right_bumper||gamepad2.right_bumper))claw.setPosition(0);
             if (driveswitch == 0) {
                 motorFL.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + ((this.gamepad1.left_stick_y)) + (this.gamepad1.right_stick_x)) * 1);
                 motorBL.setPower(-((this.gamepad1.right_stick_y) - (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.right_stick_x)) * 1 * .67);
