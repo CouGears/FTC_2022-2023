@@ -76,96 +76,96 @@ public class Calebs_Super_Cool_Auton extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
-                //Move towards high pole
+                //Close claw
                 robot.clawsetpos(0);
-                robot.drive2023(4*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 1:
-                //turn towards high pole
-                robot.turn2023gears(45);
+                //Move towards high pole
+                robot.drive(4*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 2:
-                //raise arm(Encoder)
-                robot.drive2023gears(0 * feet, -1 * feet, .5);// test for value so close to pylons
+                //turn towards high pole
+                robot.turn(45);
                 robot.counter++;
                 break;
             case 3:
-                //move robot a little forward
-                robot.drive2023gears(5 * feet, 0 * feet, .5);
+                //raise arm(Encoder)
+                robot.ArmSetPosition(10);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 4:
-                //lower arm a little tiny bit
-                robot.drive2023gears(5 * feet, 0 * feet, .5);
+                //move robot a little forward
+                robot.drive2023(.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 5:
-                //open claw
-                robot.turn(45);
+                //lower arm a little tiny bit
+                robot.ArmSetPosition(8);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 6:
-                //turn to cones
+                //open claw
+                robot.clawsetpos(1);
                 robot.counter++;
                 break;
             case 7:
-                //go to cones
+                //lower arm a little tiny bit
+                robot.ArmSetPosition(0);// this is most definetly incorrect
                 robot.counter++;
-                break;
             case 8:
-                //pick up cones
+                //move a little tiny bit back
+                robot.drive2023(-.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 9:
-                //return to high pole
+                //turn to cones
+                robot.turn2023gears(-135);
                 robot.counter++;
                 break;
             case 10:
-                //return to high pole
+                //go to cones
+                robot.drive2023(1*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 11:
-                //raise arm(Encoder)
-                robot.drive2023gears(0 * feet, -1 * feet, .5);// test for value so close to pylons
+                //pick up cones
+                robot.clawsetpos(0);
                 robot.counter++;
                 break;
             case 12:
-                //move robot a little forward
-                robot.drive2023gears(5 * feet, 0 * feet, .5);
+                //return to high pole
+                robot.drive2023(-1*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 13:
-                //lower arm a little tiny bit
-                robot.drive2023gears(5 * feet, 0 * feet, .5);
+                //turn to high pole
+                robot.turn2023gears(135);
                 robot.counter++;
                 break;
             case 14:
-                //open claw
-                robot.turn(45);
+                //raise arm(Encoder)
+                robot.ArmSetPosition(10);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 15:
-                switch (sleevenum) {
-                    case 1:
-                        robot.turn(-45);
-                        robot.drive2023gears(0 * feet, -.3 * feet, .5);
-                        break;
-                    case 2:
-                        robot.turn(-45);
-                        robot.drive2023gears(0 * feet, -.3 * feet, .5);
-                        robot.drive2023gears(1 * feet, 0 * feet, .5);
-                        robot.drive2023gears(0 * feet, 1.3 * feet, .5);
-                        break;
-                    case 3:
-                        robot.turn(-45);
-                        robot.drive2023gears(0 * feet, -.3 * feet, .5);
-                        robot.drive2023gears(1 * feet, 0 * feet, .5);
-                        robot.drive2023gears(0 * feet, 1.3 * feet, .5);
-                        robot.drive2023gears(0 * feet, 3.3 * feet, .5);
+                //move robot a little forward
+                robot.drive2023(.5*feet, 0*feet, .25);
+                robot.counter++;
+                break;
+            case 16:
+                //lower arm a little tiny bit
+                robot.ArmSetPosition(8);// this is most definetly incorrect
+                robot.counter++;
+                break;
+            case 17:
+                //open claw
+                robot.clawsetpos(1);
+                robot.counter++;
+                break;
+            case 18:
 
-                }
                 robot.counter++;
                 break;
 

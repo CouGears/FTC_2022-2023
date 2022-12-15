@@ -28,13 +28,14 @@ public class AutonMethods {
     double inch2 = rev2 / (2 * 3.14);
     double feet2 = inch2 * 12;
     double FRtpos, BRtpos, FLtpos, BLtpos;
-    public static DcMotor motorBR, motorBL, motorFL, motorFR;
+    public static DcMotor motorBR, motorBL, motorFL, motorFR, Arm;
     //public static DcMotor Forwards = intake, Sideways = carousel;
     public static Servo claw;
     public static DistanceSensor distanceSensor, distanceSensorBack;
    // public static LED red, green, red2, green2;
     public TouchSensor armTouch;
     private final ElapsedTime runtime = new ElapsedTime();
+    public static int Case = 0;
     HardwareMap map;
     Telemetry tele;
     public int counter = 0;
@@ -53,6 +54,7 @@ public class AutonMethods {
         motorBL = map.get(DcMotor.class, "motorBL");
         motorBR = map.get(DcMotor.class, "motorBR");
         motorFR = map.get(DcMotor.class, "motorFR");
+        Arm = map.get(DcMotor.class, "Arm");
        // release = map.get(DcMotor.class, "release");
 
        /* red = map.get(LED.class, "red");
@@ -67,12 +69,14 @@ public class AutonMethods {
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
       //  release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
+        Arm.setDirection(DcMotorSimple.Direction.FORWARD);
        // release.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
@@ -80,7 +84,7 @@ public class AutonMethods {
         motorBL.setTargetPosition(0);
         motorFR.setTargetPosition(0);
         motorBR.setTargetPosition(0);
-
+        Arm.setTargetPosition(0);
         int relativeLayoutId = map.appContext.getResources().getIdentifier("RelativeLayout", "id", map.appContext.getPackageName());
 
         // tele.addData(">", "Gyro Calibrating. Do Not Move!");
@@ -92,6 +96,7 @@ public class AutonMethods {
         motorBL.setPower(0);
         motorBR.setPower(0);
         motorFR.setPower(0);
+        Arm.setPower(0);
     }
 
     public long maps(long x, long in_min, long in_max, long out_min, long out_max)
@@ -234,6 +239,9 @@ public class AutonMethods {
         motorFR.setPower(0.5);
         motorBR.setPower(0.5);
 
+    }
+    public void ArmSetPosition(int position) {
+        Arm.setTargetPosition(position);
     }
     public void speed2023(double spee) {
         motorFL.setPower(spee*2);
