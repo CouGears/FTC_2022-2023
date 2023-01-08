@@ -13,15 +13,15 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 //uncomment line above to use
 public class ClawTest extends LinearOpMode {
 
-    private Servo clawLift;
+    private Servo clawLeft, clawRight;
     private AutonMethods robot = new AutonMethods();
 
     @Override
     public void runOpMode() {
 
 
-        clawLift = hardwareMap.get(Servo.class, "clawLift");
-
+        clawLeft = hardwareMap.get(Servo.class, "clawLeft");
+        clawRight = hardwareMap.get(Servo.class, "clawRight");
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -31,24 +31,24 @@ public class ClawTest extends LinearOpMode {
         while (opModeIsActive()) {
 
             if(gamepad1.a)
-            {clawLift.setPosition(0);
-                telemetry.addData("Button" , "A");
+            {clawLeft.setPosition(0);clawRight.setPosition(0);
+                telemetry.addData("Position" , "0");
                 telemetry.update();}
             if(gamepad1.b)
-            {clawLift.setPosition(1);
-                telemetry.addData("Button" , "B");
+            {clawLeft.setPosition(1);clawRight.setPosition(-1);
+                telemetry.addData("Position" , "1");
                 telemetry.update();}
             if(gamepad1.x)
-            {clawLift.setPosition(-1);
-                telemetry.addData("Button" , "Y");
+            {clawLeft.setPosition(-1);clawRight.setPosition(1);
+                telemetry.addData("Position" , "-1");
                 telemetry.update();}
             if(gamepad1.dpad_up)
-            {clawLift.setPosition(0.5);
-                telemetry.addData("Button" , "Up");
+            {clawLeft.setPosition(0.5);clawRight.setPosition(-0.5);
+                telemetry.addData("Position" , "0.5");
                 telemetry.update();}
             if(gamepad1.dpad_down)
-            {clawLift.setPosition(-0.5);
-                telemetry.addData("Button" , "Down");
+            {clawLeft.setPosition(-0.5);clawRight.setPosition(0.5);
+                telemetry.addData("Position" , "-0.5");
                 telemetry.update();}
         }
     }

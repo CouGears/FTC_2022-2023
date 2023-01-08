@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 @TeleOp
 public class CompetitionDriving2023 extends LinearOpMode {
 
-    private DcMotor motorBR, motorBL, motorFL, motorFR, lift, release;
-    private Servo claw, clawLift;
+    private DcMotor motorBR, motorBL, motorFL, motorFR, lift1 ,lift2;
+    private Servo claw, clawLeft, clawRight;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -26,26 +26,27 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBL = hardwareMap.get(DcMotor.class, "motorBL");
         motorBR = hardwareMap.get(DcMotor.class, "motorBR");
         motorFR = hardwareMap.get(DcMotor.class, "motorFR");
-        lift = hardwareMap.get(DcMotor.class, "lift");
+        lift1 = hardwareMap.get(DcMotor.class, "lift1");
+        lift2 = hardwareMap.get(DcMotor.class, "lift2");
 
 
         claw = hardwareMap.get(Servo.class, "claw");
-        clawLift = hardwareMap.get(Servo.class, "clawLift");
-
+        clawLeft = hardwareMap.get(Servo.class, "clawLeft");
+        clawRight = hardwareMap.get(Servo.class, "clawRight");
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
+        lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        lift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
-        lift.setDirection(DcMotorSimple.Direction.FORWARD);
-
+        lift1.setDirection(DcMotorSimple.Direction.FORWARD);
+        lift2.setDirection(DcMotorSimple.Direction.FORWARD);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -53,7 +54,6 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         waitForStart();
 
-        clawLift.setPosition(.5);
         while (opModeIsActive()) {
             if (gamepad1.right_bumper||gamepad2.right_bumper) {
                 claw.setPosition(0);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
@@ -88,14 +88,36 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
+            if (gamepad1.left_bumper) {
+                claw.setPosition(-1);
+            }
+            if (gamepad1.right_bumper) {
+                claw.setPosition(1);
+            }
+            if (gamepad1.left_trigger>0.5) {
+                clawLeft.setPosition(1);
+                clawRight.setPosition(-1);
+            }
+            else if (gamepad1.right_trigger>0.5) {
+                clawLeft.setPosition(-1);
+                clawRight.setPosition(1);
+            }
+            else{
+                clawLeft.setPosition(0);
+                clawRight.setPosition(0);
+            }
             if (gamepad2.dpad_up || gamepad1.dpad_up) {
-                lift.setPower(-1);//may need to speed up or slow down
+                lift1.setPower(-.2);//may Jneed to speed up or slow down
+                lift2.setPower(-.2);
 
             } else if (gamepad2.dpad_down || gamepad1.dpad_down) {
-                lift.setPower(1);//may need speed up or slow down
+                lift1.setPower(.2);//may need speed up or slow down
+                lift2.setPower(.2);//may need speed up or slow down
             } else {
-                lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                lift.setPower(0);
+                lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                lift1.setPower(0);
+                lift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                lift2.setPower(0);
             }
         }
     }
