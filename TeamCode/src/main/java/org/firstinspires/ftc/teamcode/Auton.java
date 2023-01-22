@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.autoncamera.TagRead;
 
 
 @Autonomous
@@ -50,16 +51,14 @@ public class Auton extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     AutonMethods robot = new AutonMethods();
+    TagRead tag = new TagRead();
     HardwareMap map;
     Telemetry tele;
 
     @Override
     public void init() {
-
         robot.init(hardwareMap, telemetry, false);
-
         telemetry.addData("Status", "Initialized");
-
     }
 
 
@@ -75,6 +74,18 @@ public class Auton extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
+                if(tag.pos()==1)
+                {
+
+                }
+                if(tag.pos()==2)
+                {
+
+                }
+                if(tag.pos()==3)
+                {
+
+                }
                 robot.clawsetpos(0);
                 //scan the sleeve
                 robot.drive2023(3*feet, 0*feet, .25);
