@@ -61,6 +61,16 @@ public class MotorTest extends LinearOpMode {
                 telemetry.addData("Right Position", clawRight.getCurrentPosition());
                 telemetry.update();
             }
+            else if (gamepad1.a) {
+                clawRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                clawLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                telemetry.addData("Left Position", "restting encoder");
+                telemetry.addLine();
+                telemetry.addData("Right Position", "restting encoder");
+                telemetry.update();
+                clawRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                clawLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
             else {
                 clawLeft.setPower(0);
                 clawRight.setPower(0);
