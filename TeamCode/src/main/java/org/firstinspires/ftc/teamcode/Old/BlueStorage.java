@@ -38,7 +38,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 
 
-@Autonomous
+//@Autonomous
 
 public class BlueStorage extends OpMode {
 

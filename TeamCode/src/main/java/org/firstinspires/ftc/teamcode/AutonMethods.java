@@ -30,7 +30,7 @@ public class AutonMethods {
     double FRtpos, BRtpos, FLtpos, BLtpos;
     public static DcMotor motorBR, motorBL, motorFL, motorFR, Arm;
     //public static DcMotor Forwards = intake, Sideways = carousel;
-    public static Servo claw;
+    public static Servo clawLeft, clawRight;
     public static DistanceSensor distanceSensor, distanceSensorBack;
    // public static LED red, green, red2, green2;
     public TouchSensor armTouch;
@@ -45,6 +45,11 @@ public class AutonMethods {
     Orientation angles;
 
     //Initialization
+    public void setClawPOS(double a)
+    {
+        clawLeft.setPosition(a);
+        clawRight.setPosition(a);
+    }
     public void init(HardwareMap map, Telemetry tele, boolean auton) {
         // location[0] = 0;
         //location[1] = 0;
@@ -62,7 +67,8 @@ public class AutonMethods {
         red2 = map.get(LED.class, "red2");
         green2 = map.get(LED.class, "green2");*/
 
-        claw = map.get(Servo.class, "claw");
+        clawLeft = map.get(Servo.class, "clawLeft");
+        clawRight = map.get(Servo.class, "clawRight");
 
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -73,8 +79,8 @@ public class AutonMethods {
       //  release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
-        motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
-        motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
+        motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorFR.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
         Arm.setDirection(DcMotorSimple.Direction.FORWARD);
        // release.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -148,8 +154,8 @@ public class AutonMethods {
 
         FRtpos = forward - sideways;
         BRtpos = forward + sideways;
-        FLtpos = forward - sideways;
-        BLtpos = forward + sideways;
+        FLtpos = forward + sideways;
+        BLtpos = forward - sideways;
 
         motorFL.setTargetPosition(-(int) FLtpos);
         motorBL.setTargetPosition((int) BLtpos);
@@ -162,10 +168,6 @@ public class AutonMethods {
         motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         speed(speed);
-    }
-    public void clawsetpos(double a)
-    {
-        claw.setPosition(a);
     }
     public void drive2023(double forward, double sideways, double speed) {
         runtime.reset();

@@ -40,7 +40,7 @@ import org.firstinspires.ftc.teamcode.autoncamera.TagRead;
 
 @Autonomous
 
-public class Auton extends OpMode {
+public class AutonTest extends OpMode {
 
     //TensorFlowVision vision = new TensorFlowVision();
 //   double rev = 383.6; //435 rpm motor
@@ -63,7 +63,7 @@ public class Auton extends OpMode {
 
 
     public void init_loop() {
-        robot.setClawPOS(0);
+
     }
 
     public void start() {
@@ -74,45 +74,11 @@ public class Auton extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
-                if(tag.position==1)
-                {
-                    position = 1;
-                    telemetry.addData("Park Location","Left");
-                    telemetry.update();
-                }
-                else if(tag.pos()==2)
-                {
-                    position = 2;
-                    telemetry.addData("Park Location","Middle");
-                    telemetry.update();
-                }
-                else if(tag.pos()==3)
-                {
-                    position = 3;
-                    telemetry.addData("Park Location","Right");
-                    telemetry.update();
-                }
+                robot.drive(1*feet,0,.1);
                 robot.counter++;
                 break;
-
             case 1:
-                robot.drive(0,0.5*feet,1);
-                robot.counter++;
-                break;
-            case 2:
-                robot.drive(2*feet,0,1);
-                robot.counter++;
-                break;
-            case 3:
-                if(position==1)
-                {
-                    robot.drive(0,-2*feet,1);
-                }
-                else if(position==3)
-                {
-                    robot.drive(0,2*feet,1);
-                }
-                else robot.drive(0,0,0);
+                robot.drive(0*feet,1*feet,.1);
                 robot.counter++;
                 break;
         }

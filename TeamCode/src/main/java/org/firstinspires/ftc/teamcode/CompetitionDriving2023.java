@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 public class CompetitionDriving2023 extends LinearOpMode {
 
     private DcMotor motorBR, motorBL, motorFL, motorFR, lift1 ,lift2;
-    private Servo claw, clawLeft, clawRight;
+    private Servo clawLiftL, clawLiftR, clawLeft, clawRight;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -30,7 +30,8 @@ public class CompetitionDriving2023 extends LinearOpMode {
         lift2 = hardwareMap.get(DcMotor.class, "lift2");
 
 
-        claw = hardwareMap.get(Servo.class, "claw");
+        clawLiftL = hardwareMap.get(Servo.class, "clawLiftL");
+        clawLiftR = hardwareMap.get(Servo.class, "clawLiftL");
         clawLeft = hardwareMap.get(Servo.class, "clawLeft");
         clawRight = hardwareMap.get(Servo.class, "clawRight");
 
@@ -54,30 +55,25 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         waitForStart();
 
+        clawLeft.setPosition(0);
+        clawRight.setPosition(0);
         while (opModeIsActive()) {
-            if (gamepad1.right_bumper||gamepad2.right_bumper) {
-                claw.setPosition(0);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
-            } else if (gamepad1.left_bumper||gamepad1.right_bumper) {
-                claw.setPosition(.15);//need to tune this it is a servo from -1 -> 1 -1 = 0 degrees 1 = 180
-            }
-            //while(gamepad1.right_bumper||gamepad2.right_bumper)claw.setPosition(.15);
-            //while(!(gamepad1.right_bumper||gamepad2.right_bumper))claw.setPosition(0);
             if (driveswitch == 0) {
-                motorFL.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + ((this.gamepad1.left_stick_y)) + (this.gamepad1.right_stick_x)) * 1);
-                motorBL.setPower(-((this.gamepad1.right_stick_y) - (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.right_stick_x)) * 1 * .67);
-                motorBR.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) - (this.gamepad1.right_stick_x)) * 1 * .67);
-                motorFR.setPower(-((this.gamepad1.right_stick_y) - (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) - (this.gamepad1.right_stick_x)) * 1);
+                motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)));
+                motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)));
+                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)));
+                motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)));
 
             } else if (driveswitch == 1) {
-                motorFL.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + ((this.gamepad1.left_stick_y)) + (this.gamepad1.right_stick_x)) * .6);
-                motorBL.setPower(-((this.gamepad1.right_stick_y) - (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.right_stick_x)) * .6 * .67);
-                motorBR.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) - (this.gamepad1.right_stick_x)) * .6 * .67);
-                motorFR.setPower(-((this.gamepad1.right_stick_y) - (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) - (this.gamepad1.right_stick_x)) * .6);
+                motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * .6);
+                motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * .6);
+                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .6 );
+                motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .6);
             } else if (driveswitch == 2) {
-                motorFL.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + ((this.gamepad1.left_stick_y)) + (this.gamepad1.right_stick_x)) * .3);
-                motorBL.setPower(-((this.gamepad1.right_stick_y) - (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.right_stick_x)) * .3 * .67);
-                motorBR.setPower(((this.gamepad1.right_stick_y) + (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) - (this.gamepad1.right_stick_x)) * .3 * .67);
-                motorFR.setPower(-((this.gamepad1.right_stick_y) - (this.gamepad1.left_stick_x) + (this.gamepad1.left_stick_y) - (this.gamepad1.right_stick_x)) * .3);
+                motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * .33);
+                motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * .33);
+                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .33 );
+                motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .33);
             }
             if (gamepad1.a) {
                 driveswitch = 2;
@@ -88,31 +84,47 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
+            if (gamepad1.b) {
+                clawLeft.setPosition(0.35);
+                clawRight.setPosition(-.35);
+
+            }
+            else {
+                clawLeft.setPosition(-0.2);
+                clawRight.setPosition(-0.2);
+
+            }
+
             if (gamepad1.left_bumper) {
-                claw.setPosition(-1);
+                clawLiftR.setPosition(1);
+                clawLiftL.setPosition(1);
             }
-            if (gamepad1.right_bumper) {
-                claw.setPosition(1);
+            else if (gamepad1.right_bumper) {
+                clawLiftR.setPosition(-1);
+                clawLiftL.setPosition(-1);
             }
-            if (gamepad1.left_trigger>0.5) {
-                clawLeft.setPosition(1);
-                clawRight.setPosition(-1);
+            else if(gamepad1.right_trigger>0.5)
+            {
+                clawLiftR.setPosition(0);
+                clawLiftL.setPosition(0);
             }
-            else if (gamepad1.right_trigger>0.5) {
+            //else{}
+
+            /*else if (gamepad1.right_trigger>0.5) {
                 clawLeft.setPosition(-1);
                 clawRight.setPosition(1);
-            }
-            else{
+            }*/
+           /* else{
                 clawLeft.setPosition(0);
                 clawRight.setPosition(0);
-            }
+            }*/
             if (gamepad2.dpad_up || gamepad1.dpad_up) {
-                lift1.setPower(-.2);//may Jneed to speed up or slow down
-                lift2.setPower(-.2);
+                lift1.setPower(1);//may Jneed to speed up or slow down
+                lift2.setPower(1);
 
             } else if (gamepad2.dpad_down || gamepad1.dpad_down) {
-                lift1.setPower(.2);//may need speed up or slow down
-                lift2.setPower(.2);//may need speed up or slow down
+                lift1.setPower(-1);//may need speed up or slow down
+                lift2.setPower(-1);//may need speed up or slow down
             } else {
                 lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                 lift1.setPower(0);

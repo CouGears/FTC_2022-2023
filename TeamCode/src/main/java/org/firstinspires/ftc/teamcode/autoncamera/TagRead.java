@@ -29,10 +29,11 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import java.util.ArrayList;
 
-//@TeleOp
+@TeleOp
 public class TagRead extends LinearOpMode {
     public int pos()
     {
@@ -40,7 +41,7 @@ public class TagRead extends LinearOpMode {
     }
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
-    private int position = 1;
+    public int position = 1;
     static final double FEET_PER_METER = 3.28084;
 
     // Lens intrinsics

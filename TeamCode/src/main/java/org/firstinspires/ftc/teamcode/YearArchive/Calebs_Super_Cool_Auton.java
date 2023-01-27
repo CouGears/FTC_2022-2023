@@ -38,7 +38,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 
 
-@Autonomous
+
 
 public class Calebs_Super_Cool_Auton extends OpMode {
 
@@ -65,7 +65,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
 
 
     public void init_loop() {
-    robot.clawsetpos(0);
+    //robot.clawsetpos(0);
     }
 
     public void start() {
@@ -77,7 +77,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
         switch (robot.counter) {
             case 0:
                 //Close claw
-                robot.clawsetpos(0);
+                //robot.clawsetpos(0);
                 robot.counter++;
                 break;
             case 1:
@@ -107,7 +107,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 6:
                 //open claw
-                robot.clawsetpos(1);
+                //robot.clawsetpos(1);
                 robot.counter++;
                 break;
             case 7:
@@ -131,7 +131,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 11:
                 //pick up cones
-                robot.clawsetpos(0);
+                //robot.clawsetpos(0);
                 robot.counter++;
                 break;
             case 12:
@@ -161,7 +161,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 17:
                 //open claw
-                robot.clawsetpos(1);
+                //robot.clawsetpos(1);
                 robot.counter++;
                 break;
             case 18:

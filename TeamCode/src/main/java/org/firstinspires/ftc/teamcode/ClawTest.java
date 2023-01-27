@@ -31,15 +31,18 @@ public class ClawTest extends LinearOpMode {
         while (opModeIsActive()) {
 
             if(gamepad1.a)
-            {clawLeft.setPosition(0);clawRight.setPosition(0);
+            {clawLeft.setPosition(0);
+                clawRight.setPosition(0);
                 telemetry.addData("Position" , "0");
                 telemetry.update();}
             if(gamepad1.b)
-            {clawLeft.setPosition(1);clawRight.setPosition(-1);
+            {clawLeft.setPosition(1);
+                clawRight.setPosition(-1);
                 telemetry.addData("Position" , "1");
                 telemetry.update();}
             if(gamepad1.x)
-            {clawLeft.setPosition(-1);clawRight.setPosition(1);
+            {clawLeft.setPosition(-1);
+                clawRight.setPosition(1);
                 telemetry.addData("Position" , "-1");
                 telemetry.update();}
             if(gamepad1.dpad_up)
