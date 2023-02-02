@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 @TeleOp
 public class CompetitionDriving2023 extends LinearOpMode {
 
-    private DcMotor motorBR, motorBL, motorFL, motorFR, lift1 ,lift2;
+    private DcMotor motorBR, motorBL, motorFL, motorFR, LiftLeft ,LiftRight;
     private Servo clawLiftL, clawLiftR, clawLeft, clawRight;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
@@ -26,8 +26,8 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBL = hardwareMap.get(DcMotor.class, "motorBL");
         motorBR = hardwareMap.get(DcMotor.class, "motorBR");
         motorFR = hardwareMap.get(DcMotor.class, "motorFR");
-        lift1 = hardwareMap.get(DcMotor.class, "lift1");
-        lift2 = hardwareMap.get(DcMotor.class, "lift2");
+        LiftLeft = hardwareMap.get(DcMotor.class, "LiftLeft");
+        LiftRight = hardwareMap.get(DcMotor.class, "lift2");
 
 
         clawLiftL = hardwareMap.get(Servo.class, "clawLiftL");
@@ -39,15 +39,15 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
-        lift1.setDirection(DcMotorSimple.Direction.FORWARD);
-        lift2.setDirection(DcMotorSimple.Direction.FORWARD);
+        LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -119,17 +119,17 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 clawRight.setPosition(0);
             }*/
             if (gamepad2.dpad_up || gamepad1.dpad_up) {
-                lift1.setPower(1);//may Jneed to speed up or slow down
-                lift2.setPower(1);
+                LiftLeft.setPower(1);//may Jneed to speed up or slow down
+                LiftRight.setPower(1);
 
             } else if (gamepad2.dpad_down || gamepad1.dpad_down) {
-                lift1.setPower(-1);//may need speed up or slow down
-                lift2.setPower(-1);//may need speed up or slow down
+                LiftLeft.setPower(-1);//may need speed up or slow down
+                LiftRight.setPower(-1);//may need speed up or slow down
             } else {
-                lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                lift1.setPower(0);
-                lift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                lift2.setPower(0);
+                LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                LiftLeft.setPower(0);
+                LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                LiftRight.setPower(0);
             }
         }
     }
