@@ -28,11 +28,11 @@ public class AutonMethods {
     double inch2 = rev2 / (2 * 3.14);
     double feet2 = inch2 * 12;
     double FRtpos, BRtpos, FLtpos, BLtpos;
-    public static DcMotor motorBR, motorBL, motorFL, motorFR, Arm;
+    public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
     //public static DcMotor Forwards = intake, Sideways = carousel;
-    public static Servo clawLeft, clawRight;
+    public static Servo claw, armL, armR;
     public static DistanceSensor distanceSensor, distanceSensorBack;
-   // public static LED red, green, red2, green2;
+    // public static LED red, green, red2, green2;
     public TouchSensor armTouch;
     private final ElapsedTime runtime = new ElapsedTime();
     public static int Case = 0;
@@ -47,8 +47,12 @@ public class AutonMethods {
     //Initialization
     public void setClawPOS(double a)
     {
-        clawLeft.setPosition(a);
-        clawRight.setPosition(a);
+        claw.setPosition(a);
+    }
+    public void setArmPOS(double a)
+    {
+        armL.setPosition(a);
+        armR.setPosition(-1*a);
     }
     public void init(HardwareMap map, Telemetry tele, boolean auton) {
         // location[0] = 0;
@@ -59,38 +63,44 @@ public class AutonMethods {
         motorBL = map.get(DcMotor.class, "motorBL");
         motorBR = map.get(DcMotor.class, "motorBR");
         motorFR = map.get(DcMotor.class, "motorFR");
-        Arm = map.get(DcMotor.class, "Arm");
-       // release = map.get(DcMotor.class, "release");
+        LiftRight = map.get(DcMotor.class, "LiftRight");
+        LiftLeft = map.get(DcMotor.class, "LiftLeft");
+        // release = map.get(DcMotor.class, "release");
 
        /* red = map.get(LED.class, "red");
         green = map.get(LED.class, "green");
         red2 = map.get(LED.class, "red2");
         green2 = map.get(LED.class, "green2");*/
 
-        clawLeft = map.get(Servo.class, "clawLeft");
-        clawRight = map.get(Servo.class, "clawRight");
+        claw = map.get(Servo.class, "claw");
 
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-      //  release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        //  release.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motorFL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorFR.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
-        Arm.setDirection(DcMotorSimple.Direction.FORWARD);
-       // release.setDirection(DcMotorSimple.Direction.FORWARD);
+        LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        // release.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         motorFL.setTargetPosition(0);
         motorBL.setTargetPosition(0);
         motorFR.setTargetPosition(0);
         motorBR.setTargetPosition(0);
-        Arm.setTargetPosition(0);
+        LiftLeft.setTargetPosition(0);
+        LiftRight.setTargetPosition(0);
+
         int relativeLayoutId = map.appContext.getResources().getIdentifier("RelativeLayout", "id", map.appContext.getPackageName());
 
         // tele.addData(">", "Gyro Calibrating. Do Not Move!");
@@ -102,7 +112,9 @@ public class AutonMethods {
         motorBL.setPower(0);
         motorBR.setPower(0);
         motorFR.setPower(0);
-        Arm.setPower(0);
+        LiftLeft.setPower(0);
+        LiftRight.setPower(0);
+
     }
 
     public long maps(long x, long in_min, long in_max, long out_min, long out_max)
@@ -242,8 +254,9 @@ public class AutonMethods {
         motorBR.setPower(0.5);
 
     }
-    public void ArmSetPosition(int position) {
-        Arm.setTargetPosition(position);
+    public void LiftSetPosition(int position) {
+        LiftLeft.setTargetPosition(position);
+        LiftRight.setTargetPosition(position);
     }
     public void speed2023(double spee) {
         motorFL.setPower(spee*2);
@@ -257,12 +270,12 @@ public class AutonMethods {
         motorFR.setPower(spee);
         motorBR.setPower(spee);
     }
-/*public void setRelease(int x)
-{
-    motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    release.setTargetPosition(x);
-    motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-}*/
+    /*public void setRelease(int x)
+    {
+        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        release.setTargetPosition(x);
+        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }*/
     public void newSleep(double timeinSeconds) {
         runtime.reset();
         while (runtime.seconds() < timeinSeconds);

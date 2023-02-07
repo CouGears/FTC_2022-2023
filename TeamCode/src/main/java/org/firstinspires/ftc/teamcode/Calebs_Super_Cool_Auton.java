@@ -38,7 +38,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 
 
-
+//uncomment the following line to use
+@Autonomous
 
 public class Calebs_Super_Cool_Auton extends OpMode {
 
@@ -65,7 +66,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
 
 
     public void init_loop() {
-    //robot.clawsetpos(0);
+        //robot.clawsetpos(0);
     }
 
     public void start() {
@@ -77,7 +78,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
         switch (robot.counter) {
             case 0:
                 //Close claw
-                //robot.clawsetpos(0);
+                robot.setClawPOS(0);
                 robot.counter++;
                 break;
             case 1:
@@ -92,27 +93,27 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 3:
                 //raise arm(Encoder)
-                robot.ArmSetPosition(10);// this is most definetly incorrect
+                robot.LiftSetPosition(10);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 4:
                 //move robot a little forward
-                robot.drive2023(.5*feet, 0*feet, .25);
+                robot.drive(.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 5:
                 //lower arm a little tiny bit
-                robot.ArmSetPosition(8);// this is most definetly incorrect
+                robot.LiftSetPosition(8);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 6:
                 //open claw
-                //robot.clawsetpos(1);
+                robot.setClawPOS(1);
                 robot.counter++;
                 break;
             case 7:
                 //lower arm a little tiny bit
-                robot.ArmSetPosition(0);// this is most definetly incorrect
+                robot.LiftSetPosition(0);// this is most definetly incorrect
                 robot.counter++;
             case 8:
                 //move a little tiny bit back
@@ -121,47 +122,47 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 9:
                 //turn to cones
-                robot.turn2023gears(-135);
+                robot.turn(-135);
                 robot.counter++;
                 break;
             case 10:
                 //go to cones
-                robot.drive2023(1*feet, 0*feet, .25);
+                robot.drive(1*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 11:
                 //pick up cones
-                //robot.clawsetpos(0);
+                robot.setClawPOS(0);
                 robot.counter++;
                 break;
             case 12:
                 //return to high pole
-                robot.drive2023(-1*feet, 0*feet, .25);
+                robot.drive(-1*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 13:
                 //turn to high pole
-                robot.turn2023gears(135);
+                robot.turn(135);
                 robot.counter++;
                 break;
             case 14:
                 //raise arm(Encoder)
-                robot.ArmSetPosition(10);// this is most definetly incorrect
+                robot.LiftSetPosition(10);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 15:
                 //move robot a little forward
-                robot.drive2023(.5*feet, 0*feet, .25);
+                robot.drive(.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 16:
                 //lower arm a little tiny bit
-                robot.ArmSetPosition(8);// this is most definetly incorrect
+                robot.LiftSetPosition(8);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 17:
                 //open claw
-                //robot.clawsetpos(1);
+                robot.setClawPOS(1);
                 robot.counter++;
                 break;
             case 18:
@@ -172,5 +173,6 @@ public class Calebs_Super_Cool_Auton extends OpMode {
         }
     }
 }
+
 
 
