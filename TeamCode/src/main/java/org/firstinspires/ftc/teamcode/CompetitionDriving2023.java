@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 @TeleOp
 public class CompetitionDriving2023 extends LinearOpMode {
 
-    private DcMotor motorBR, motorBL, motorFL, motorFR, LiftLeft ,LiftRight;
-    private Servo clawLiftL, clawLiftR, clawLeft, clawRight;
+    public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
+    public static Servo claw, armL, armR;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -30,10 +30,9 @@ public class CompetitionDriving2023 extends LinearOpMode {
         LiftRight = hardwareMap.get(DcMotor.class, "lift2");
 
 
-        clawLiftL = hardwareMap.get(Servo.class, "clawLiftL");
-        clawLiftR = hardwareMap.get(Servo.class, "clawLiftL");
-        clawLeft = hardwareMap.get(Servo.class, "clawLeft");
-        clawRight = hardwareMap.get(Servo.class, "clawRight");
+        claw = hardwareMap.get(Servo.class, "claw");
+        armL = hardwareMap.get(Servo.class, "armL");
+        armR = hardwareMap.get(Servo.class, "armR");
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -55,8 +54,6 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         waitForStart();
 
-        clawLeft.setPosition(0);
-        clawRight.setPosition(0);
         while (opModeIsActive()) {
             if (driveswitch == 0) {
                 motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)));
@@ -84,29 +81,26 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
-            if (gamepad1.b) {
-                clawLeft.setPosition(0.35);
-                clawRight.setPosition(-.35);
-
+            if (gamepad1.right_trigger>0.5) {
+                claw.setPosition(-1);
             }
             else {
-                clawLeft.setPosition(-0.2);
-                clawRight.setPosition(-0.2);
+                claw.setPosition(1);
 
             }
 
             if (gamepad1.left_bumper) {
-                clawLiftR.setPosition(1);
-                clawLiftL.setPosition(1);
+                armR.setPosition(1);
+                armL.setPosition(1);
             }
             else if (gamepad1.right_bumper) {
-                clawLiftR.setPosition(-1);
-                clawLiftL.setPosition(-1);
+                armR.setPosition(-1);
+                armL.setPosition(-1);
             }
             else if(gamepad1.right_trigger>0.5)
             {
-                clawLiftR.setPosition(0);
-                clawLiftL.setPosition(0);
+                armR.setPosition(0);
+                armL.setPosition(0);
             }
             //else{}
 

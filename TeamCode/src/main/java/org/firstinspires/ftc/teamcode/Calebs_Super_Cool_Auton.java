@@ -97,75 +97,88 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 robot.counter++;
                 break;
             case 4:
+                //turn arm up
+                robot.setArmPOS(1);
+                robot.counter++;
+                break;
+            case 5:
                 //move robot a little forward
                 robot.drive(.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
-            case 5:
+            case 6:
                 //lower arm a little tiny bit
                 robot.LiftSetPosition(8);// this is most definetly incorrect
                 robot.counter++;
                 break;
-            case 6:
+            case 7:
                 //open claw
                 robot.setClawPOS(1);
                 robot.counter++;
                 break;
-            case 7:
+            case 8:
                 //lower arm a little tiny bit
                 robot.LiftSetPosition(0);// this is most definetly incorrect
                 robot.counter++;
-            case 8:
+            case 9:
+                //lower arm a little tiny bit
+                robot.setArmPOS(0);// this is most definetly incorrect
+                robot.counter++;
+            case 10:
                 //move a little tiny bit back
                 robot.drive2023(-.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
-            case 9:
+            case 11:
                 //turn to cones
                 robot.turn(-135);
                 robot.counter++;
                 break;
-            case 10:
+            case 12:
                 //go to cones
                 robot.drive(1*feet, 0*feet, .25);
                 robot.counter++;
                 break;
-            case 11:
+            case 13:
                 //pick up cones
                 robot.setClawPOS(0);
                 robot.counter++;
                 break;
-            case 12:
+            case 14:
                 //return to high pole
                 robot.drive(-1*feet, 0*feet, .25);
                 robot.counter++;
                 break;
-            case 13:
+            case 15:
                 //turn to high pole
                 robot.turn(135);
                 robot.counter++;
                 break;
-            case 14:
+            case 16:
                 //raise arm(Encoder)
                 robot.LiftSetPosition(10);// this is most definetly incorrect
                 robot.counter++;
                 break;
-            case 15:
+            case 17:
+                //lower arm a little tiny bit
+                robot.setArmPOS(1);// this is most definetly incorrect
+                robot.counter++;
+            case 18:
                 //move robot a little forward
                 robot.drive(.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
-            case 16:
+            case 19:
                 //lower arm a little tiny bit
                 robot.LiftSetPosition(8);// this is most definetly incorrect
                 robot.counter++;
                 break;
-            case 17:
+            case 20:
                 //open claw
                 robot.setClawPOS(1);
                 robot.counter++;
                 break;
-            case 18:
+            case 21:
 
                 robot.counter++;
                 break;
