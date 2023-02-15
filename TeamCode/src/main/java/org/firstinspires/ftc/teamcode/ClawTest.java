@@ -31,7 +31,8 @@ public class ClawTest extends LinearOpMode {
         while (opModeIsActive()) {
 
             if(gamepad1.a)
-            {clawLeft.setPosition(0);
+            {
+                clawLeft.setPosition(0);
                 clawRight.setPosition(0);
                 telemetry.addData("Position" , "0");
                 telemetry.update();}
@@ -52,6 +53,14 @@ public class ClawTest extends LinearOpMode {
             if(gamepad1.dpad_down)
             {clawLeft.setPosition(-0.5);clawRight.setPosition(0.5);
                 telemetry.addData("Position" , "-0.5");
+                telemetry.update();}
+            if(gamepad1.dpad_right)
+            {clawRight.setPosition(0);
+                telemetry.addData("Right Position" , "0");
+                telemetry.update();}
+            if(gamepad1.dpad_right)
+            {clawLeft.setPosition(0);
+                telemetry.addData("Left Position" , "0");
                 telemetry.update();}
         }
     }
