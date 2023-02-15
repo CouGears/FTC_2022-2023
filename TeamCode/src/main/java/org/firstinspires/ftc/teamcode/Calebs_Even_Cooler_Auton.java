@@ -41,14 +41,14 @@ import org.firstinspires.ftc.teamcode.AutonMethods;
 //uncomment the following line to use
 @Autonomous
 
-public class Calebs_Super_Cool_Auton extends OpMode {
+public class Calebs_Even_Cooler_Auton extends OpMode {
 
     //TensorFlowVision vision = new TensorFlowVision();
 //   double rev = 383.6; //435 rpm motor
     double rev = 537.7; //312 rpm motor
     double inch = rev / (3.78 * 3.14);
     double feet = inch * 12 + (10 * inch);
-    short sleevenum = 1;
+    int sleevenum = 1;
 
     private ElapsedTime runtime = new ElapsedTime();
     AutonMethods robot = new AutonMethods();
@@ -75,12 +75,10 @@ public class Calebs_Super_Cool_Auton extends OpMode {
 
 
     public void loop() {
-        telemetry.addData("Step", robot.counter);
-        telemetry.update();
         switch (robot.counter) {
             case 0:
                 //Close claw
-                robot.setClawPOS(0);
+                //robot.setClawPOS(0);
                 robot.counter++;
                 break;
             case 1:
@@ -89,13 +87,13 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 robot.counter++;
                 break;
             case 2:
-                //turn towards high pole
-                robot.turn(-45);
+                //turn towardtus high pole
+                robot.turn(45);
                 robot.counter++;
                 break;
             case 3:
                 //raise arm(Encoder)
-                robot.LiftSetPosition(10);// this is most definetly incorrect
+                //robot.LiftSetPosition(10);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 4:
@@ -110,17 +108,17 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 6:
                 //lower arm a little tiny bit
-                robot.LiftSetPosition(8);// this is most definetly incorrect
+                //robot.LiftSetPosition(8);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 7:
                 //open claw
-                robot.setClawPOS(1);
+                //robot.setClawPOS(1);
                 robot.counter++;
                 break;
             case 8:
                 //lower arm a little tiny bit
-                robot.LiftSetPosition(0);// this is most definetly incorrect
+                //robot.LiftSetPosition(0);// this is most definetly incorrect
                 robot.counter++;
             case 9:
                 //lower arm a little tiny bit
@@ -128,7 +126,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 robot.counter++;
             case 10:
                 //move a little tiny bit back
-                robot.drive2023(-.5*feet, 0*feet, .25);
+                robot.drive(-.5*feet, 0*feet, .25);
                 robot.counter++;
                 break;
             case 11:
@@ -158,7 +156,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 16:
                 //raise arm(Encoder)
-                robot.LiftSetPosition(10);// this is most definetly incorrect
+                //robot.LiftSetPosition(10);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 17:
@@ -172,12 +170,12 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 19:
                 //lower arm a little tiny bit
-                robot.LiftSetPosition(8);// this is most definetly incorrect
+                //robot.LiftSetPosition(8);// this is most definetly incorrect
                 robot.counter++;
                 break;
             case 20:
                 //open claw
-                robot.setClawPOS(1);
+                //robot.setClawPOS(1);
                 robot.counter++;
                 break;
             case 21:
@@ -188,6 +186,3 @@ public class Calebs_Super_Cool_Auton extends OpMode {
         }
     }
 }
-
-
-

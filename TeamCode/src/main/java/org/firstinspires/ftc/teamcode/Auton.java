@@ -100,10 +100,18 @@ public class Auton extends OpMode {
                 robot.counter++;
                 break;
             case 2:
-                robot.drive(2*feet,0,1);
+                robot.drive(2.5*feet,0,1);
                 robot.counter++;
                 break;
             case 3:
+                robot.turn(45);
+                robot.counter++;
+                break;
+            case 4:
+
+                robot.counter++;
+                break;
+            case 15:
                 if(position==1)
                 {
                     robot.drive(0,-2*feet,1);
