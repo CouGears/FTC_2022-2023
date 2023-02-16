@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 public class CompetitionDriving2023 extends LinearOpMode {
 
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
-    public static Servo claw, armL, armR;
+    public static Servo intake, armL, armR;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -30,7 +30,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
         LiftRight = hardwareMap.get(DcMotor.class, "lift2");
 
 
-        claw = hardwareMap.get(Servo.class, "claw");
+        intake = hardwareMap.get(Servo.class, "intake");
         armL = hardwareMap.get(Servo.class, "armL");
         armR = hardwareMap.get(Servo.class, "armR");
 
@@ -82,10 +82,10 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 driveswitch = 0;
             }
             if (gamepad1.right_trigger>0.5) {
-                claw.setPosition(-1);
+                intake.setPosition(-1);
             }
             else {
-                claw.setPosition(1);
+                intake.setPosition(1);
 
             }
 

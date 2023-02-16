@@ -30,7 +30,7 @@ public class AutonMethods {
     double FRtpos, BRtpos, FLtpos, BLtpos;
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
     //public static DcMotor Forwards = intake, Sideways = carousel;
-    public static Servo claw, armL, armR;
+    public static Servo intake, armL, armR;
     public static DistanceSensor distanceSensor, distanceSensorBack;
     // public static LED red, green, red2, green2;
     public TouchSensor armTouch;
@@ -45,9 +45,9 @@ public class AutonMethods {
     Orientation angles;
 
     //Initialization
-    public void setClawPOS(double a)
+    public void setIntakePOS(double a)
     {
-        claw.setPosition(a);
+        intake.setPosition(a);
     }
     public void setArmPOS(double a)
     {
@@ -72,7 +72,7 @@ public class AutonMethods {
         red2 = map.get(LED.class, "red2");
         green2 = map.get(LED.class, "green2");*/
 
-        claw = map.get(Servo.class, "claw");
+        intake = map.get(Servo.class, "intake");
 
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

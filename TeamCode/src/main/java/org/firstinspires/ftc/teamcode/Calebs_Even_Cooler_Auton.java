@@ -39,7 +39,7 @@ import org.firstinspires.ftc.teamcode.AutonMethods;
 
 
 //uncomment the following line to use
-@Autonomous
+//@Autonomous
 
 public class Calebs_Even_Cooler_Auton extends OpMode {
 

@@ -63,7 +63,7 @@ public class Auton extends OpMode {
 
 
     public void init_loop() {
-        robot.setClawPOS(0);
+        robot.setIntakePOS(0);
     }
 
     public void start() {

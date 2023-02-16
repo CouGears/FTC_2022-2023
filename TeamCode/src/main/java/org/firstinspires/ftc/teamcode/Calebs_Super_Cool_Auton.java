@@ -39,7 +39,7 @@ import org.firstinspires.ftc.teamcode.AutonMethods;
 
 
 //uncomment the following line to use
-@Autonomous
+//@Autonomous
 
 public class Calebs_Super_Cool_Auton extends OpMode {
 
@@ -80,7 +80,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
         switch (robot.counter) {
             case 0:
                 //Close claw
-                robot.setClawPOS(0);
+                robot.setIntakePOS(0);
                 robot.counter++;
                 break;
             case 1:
@@ -115,7 +115,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 7:
                 //open claw
-                robot.setClawPOS(1);
+                robot.setIntakePOS(1);
                 robot.counter++;
                 break;
             case 8:
@@ -177,7 +177,7 @@ public class Calebs_Super_Cool_Auton extends OpMode {
                 break;
             case 20:
                 //open claw
-                robot.setClawPOS(1);
+                robot.setIntakePOS(1);
                 robot.counter++;
                 break;
             case 21:
