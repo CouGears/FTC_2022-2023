@@ -84,36 +84,21 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.right_trigger>0.5) {
                 intake.setPosition(-1);
             }
-            else {
+            else if (gamepad1.left_trigger>0.5){
                 intake.setPosition(1);
-
             }
-
+            else{}
             if (gamepad1.left_bumper) {
                 armR.setPosition(1);
                 armL.setPosition(1);
             }
             else if (gamepad1.right_bumper) {
-                armR.setPosition(-1);
-                armL.setPosition(-1);
-            }
-            else if(gamepad1.right_trigger>0.5)
-            {
                 armR.setPosition(0);
                 armL.setPosition(0);
             }
-            //else{}
-
-            /*else if (gamepad1.right_trigger>0.5) {
-                clawLeft.setPosition(-1);
-                clawRight.setPosition(1);
-            }*/
-           /* else{
-                clawLeft.setPosition(0);
-                clawRight.setPosition(0);
-            }*/
+            else{}
             if (gamepad2.dpad_up || gamepad1.dpad_up) {
-                LiftLeft.setPower(1);//may Jneed to speed up or slow down
+                LiftLeft.setPower(1);//may need to speed up or slow down
                 LiftRight.setPower(1);
 
             } else if (gamepad2.dpad_down || gamepad1.dpad_down) {
