@@ -74,33 +74,28 @@ public class Auton extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
-                if(tag.position==1)
-                {
+                if (tag.pos() == 1) {
                     position = 1;
-                    telemetry.addData("Park Location","Left");
+                    telemetry.addData("Park Location", "Left");
                     telemetry.update();
-                }
-                else if(tag.pos()==2)
-                {
+                } else if (tag.pos() == 2) {
                     position = 2;
-                    telemetry.addData("Park Location","Middle");
+                    telemetry.addData("Park Location", "Middle");
                     telemetry.update();
-                }
-                else if(tag.pos()==3)
-                {
+                } else if (tag.pos() == 3) {
                     position = 3;
-                    telemetry.addData("Park Location","Right");
+                    telemetry.addData("Park Location", "Right");
                     telemetry.update();
                 }
                 robot.counter++;
                 break;
 
             case 1:
-                robot.drive(0,0.5*feet,1);
+                robot.drive(0, 0.5 * feet, 1);
                 robot.counter++;
                 break;
             case 2:
-                robot.drive(2.5*feet,0,1);
+                robot.drive(2.5 * feet, 0, 1);
                 robot.counter++;
                 break;
             case 3:
@@ -112,15 +107,11 @@ public class Auton extends OpMode {
                 robot.counter++;
                 break;
             case 15:
-                if(position==1)
-                {
-                    robot.drive(0,-2*feet,1);
-                }
-                else if(position==3)
-                {
-                    robot.drive(0,2*feet,1);
-                }
-                else robot.drive(0,0,0);
+                if (position == 1) {
+                    robot.drive(0, -2 * feet, 1);
+                } else if (position == 3) {
+                    robot.drive(0, 2 * feet, 1);
+                } else robot.drive(0, 0, 0);
                 robot.counter++;
                 break;
         }

@@ -45,15 +45,15 @@ public class AutonMethods {
     Orientation angles;
 
     //Initialization
-    public void setIntakePOS(double a)
-    {
+    public void setIntakePOS(double a) {
         intake.setPosition(a);
     }
-    public void setArmPOS(double a)
-    {
+
+    public void setArmPOS(double a) {
         armL.setPosition(a);
-        armR.setPosition(-1*a);
+        armR.setPosition(-1 * a);
     }
+
     public void init(HardwareMap map, Telemetry tele, boolean auton) {
         // location[0] = 0;
         //location[1] = 0;
@@ -117,42 +117,10 @@ public class AutonMethods {
 
     }
 
-    public long maps(long x, long in_min, long in_max, long out_min, long out_max)
-    {
+    public long maps(long x, long in_min, long in_max, long out_min, long out_max) {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
-    /*
-    public void setRed2()
-    {
-        green2.enable(false);
-        red2.enable(true);
-    }
-    public void setGreen2()
-    {
-        red2.enable(false);
-        green2.enable(true);
-    }
-    public void setAmber2()
-    {
-        red2.enable(true);
-        green2.enable(true);
-    }
-    public void setRed()
-    {
-        green.enable(false);
-        red.enable(true);
-    }
-        public void setGreen()
-        {
-            red.enable(false);
-            green.enable(true);
-        }
-        public void setAmber()
-        {
-            red.enable(true);
-            green.enable(true);
-        }
-*/
+
     //Function to move the robot in any direction
     public void drive(double forward, double sideways, double speed) {
         runtime.reset();
@@ -181,35 +149,8 @@ public class AutonMethods {
 
         speed(speed);
     }
-    public void drive2023(double forward, double sideways, double speed) {
-        runtime.reset();
-        while (motorFR.isBusy() || motorFL.isBusy()) {
-            if (runtime.seconds() > 2) break;
-        }
-        forward = (forward/2)-(6.5*inch);
-        sideways = (sideways/2)-(6.5*inch);
-        motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        FRtpos = forward - sideways;
-        BRtpos = forward + sideways;
-        FLtpos = forward - sideways;
-        BLtpos = forward + sideways;
 
-        motorFL.setTargetPosition((-(int) FLtpos)*2);
-        motorBL.setTargetPosition(((int) BLtpos));
-        motorFR.setTargetPosition((((int) FRtpos))*2);
-        motorBR.setTargetPosition(-(int) BRtpos);
-
-        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        speed2023(speed);
-    }
     //circumscribed robot has a diameter of 21 inches
     public void turn(double deg) {
         while (motorFR.isBusy() || motorFL.isBusy()) {
@@ -231,54 +172,22 @@ public class AutonMethods {
         motorBR.setPower(0.5);
 
     }
-    public void turn2023gears(double deg) {
-        while (motorFR.isBusy() || motorFL.isBusy()) {
-            if (runtime.seconds() > 2) break;
-        }
-        motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //for every drive function remember to reset encoder
-        motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        double deltaturn = (deg / 360.0) * 21.654 * 3.14 * inch * 2.2;
-        motorFL.setTargetPosition(-(int) deltaturn);
-        motorBL.setTargetPosition((int) (deltaturn/2));
-        motorFR.setTargetPosition((int) deltaturn);
-        motorBR.setTargetPosition(-(int) (deltaturn/2));
-        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorFL.setPower(0.5);
-        motorBL.setPower(0.5);
-        motorFR.setPower(0.5);
-        motorBR.setPower(0.5);
 
-    }
     public void LiftSetPosition(int position) {
         LiftLeft.setTargetPosition(position);
         LiftRight.setTargetPosition(position);
     }
-    public void speed2023(double spee) {
-        motorFL.setPower(spee*2);
-        motorBL.setPower(spee);
-        motorFR.setPower(spee*2);
-        motorBR.setPower(spee);
-    }
+
     public void speed(double spee) {
         motorFL.setPower(spee);
         motorBL.setPower(spee);
         motorFR.setPower(spee);
         motorBR.setPower(spee);
     }
-    /*public void setRelease(int x)
-    {
-        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        release.setTargetPosition(x);
-        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }*/
+
     public void newSleep(double timeinSeconds) {
         runtime.reset();
-        while (runtime.seconds() < timeinSeconds);
+        while (runtime.seconds() < timeinSeconds) ;
 
     }
 
@@ -326,5 +235,4 @@ public class AutonMethods {
             motorBR.setPower(-(((int) BRtpos + motorBR.getCurrentPosition()) / distd) + .2);
         }
     }
-
 }

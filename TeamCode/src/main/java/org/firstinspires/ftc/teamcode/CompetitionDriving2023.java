@@ -64,12 +64,12 @@ public class CompetitionDriving2023 extends LinearOpMode {
             } else if (driveswitch == 1) {
                 motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * .6);
                 motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * .6);
-                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .6 );
+                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .6);
                 motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .6);
             } else if (driveswitch == 2) {
                 motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * .33);
                 motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * .33);
-                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .33 );
+                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .33);
                 motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .33);
             }
             if (gamepad1.a) {
@@ -81,22 +81,20 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
-            if (gamepad1.right_trigger>0.5) {
+            if (gamepad1.right_trigger > 0.5) {
                 intake.setPosition(-1);
-            }
-            else if (gamepad1.left_trigger>0.5){
+            } else if (gamepad1.left_trigger > 0.5) {
                 intake.setPosition(1);
+            } else {
             }
-            else{}
             if (gamepad1.left_bumper) {
                 armR.setPosition(1);
                 armL.setPosition(1);
-            }
-            else if (gamepad1.right_bumper) {
+            } else if (gamepad1.right_bumper) {
                 armR.setPosition(0);
                 armL.setPosition(0);
+            } else {
             }
-            else{}
             if (gamepad2.dpad_up || gamepad1.dpad_up) {
                 LiftLeft.setPower(1);//may need to speed up or slow down
                 LiftRight.setPower(1);
