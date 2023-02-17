@@ -8,7 +8,7 @@ INJECTED from /Users/danielsarasohn/Documents/GitHub/FTC_2022-2023/FtcRobotContr
 		ADDED from /Users/danielsarasohn/Documents/GitHub/FTC_2022-2023/FtcRobotController/src/main/AndroidManifest.xml:2:1-79:12
 		INJECTED from /Users/danielsarasohn/Documents/GitHub/FTC_2022-2023/FtcRobotController/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /Users/danielsarasohn/Documents/GitHub/FTC_2022-2023/FtcRobotController/src/main/AndroidManifest.xml:5:11-36
+		ADDED from /Users/danielsarasohn/Documents/GitHub/FTC_2022-2023/FtcRobotController/src/main/AndroidManifest.xml:5:11-38
 	xmlns:tools
 		ADDED from /Users/danielsarasohn/Documents/GitHub/FTC_2022-2023/FtcRobotController/src/main/AndroidManifest.xml:3:11-57
 	xmlns:android
