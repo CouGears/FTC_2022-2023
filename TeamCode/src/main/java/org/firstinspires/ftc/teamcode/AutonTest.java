@@ -37,8 +37,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.autoncamera.TagRead;
 
-
-@Autonomous
+//uncomment the following line to use
+//@Autonomous
 
 public class AutonTest extends OpMode {
 

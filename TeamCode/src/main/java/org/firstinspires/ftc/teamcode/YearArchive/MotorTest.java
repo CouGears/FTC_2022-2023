@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.YearArchive;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -9,7 +9,8 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
-@TeleOp
+//uncomment the following to use
+//@TeleOp
 public class MotorTest extends LinearOpMode {
 
     private DcMotor lift1, lift2;

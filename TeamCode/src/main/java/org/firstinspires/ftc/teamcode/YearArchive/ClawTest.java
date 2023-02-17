@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.YearArchive;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
-@TeleOp
+//@TeleOp
 //uncomment line above to use
 public class ClawTest extends LinearOpMode {
 

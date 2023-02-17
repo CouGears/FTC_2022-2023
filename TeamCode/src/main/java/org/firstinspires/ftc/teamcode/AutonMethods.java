@@ -176,6 +176,10 @@ public class AutonMethods {
     public void LiftSetPosition(int position) {
         LiftLeft.setTargetPosition(position);
         LiftRight.setTargetPosition(position);
+        LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftLeft.setPower(1);
+        LiftRight.setPower(1);
     }
 
     public void speed(double spee) {
