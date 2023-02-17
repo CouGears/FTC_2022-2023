@@ -11,28 +11,27 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
 @TeleOp
 public class CompetitionDriving2023 extends LinearOpMode {
-
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
-    public static Servo intake, armL, armR;
+    public static Servo claw, armL, armR;
+    private Servo shoulder1, shoulder2;
     private AutonMethods robot = new AutonMethods();
-    public int driveswitch = 1;
-
-
+    int driveswitch;
     @Override
     public void runOpMode() {
-        //region hardware map
-        LEDMethods LED = new LEDMethods();
+
         motorFL = hardwareMap.get(DcMotor.class, "motorFL");
         motorBL = hardwareMap.get(DcMotor.class, "motorBL");
         motorBR = hardwareMap.get(DcMotor.class, "motorBR");
         motorFR = hardwareMap.get(DcMotor.class, "motorFR");
-        LiftLeft = hardwareMap.get(DcMotor.class, "LiftLeft");
-        LiftRight = hardwareMap.get(DcMotor.class, "lift2");
+        LiftLeft = hardwareMap.get(DcMotor.class, "LiftLeft");// check config and change to make it match
+        LiftRight = hardwareMap.get(DcMotor.class, "LiftRight");
 
 
-        intake = hardwareMap.get(Servo.class, "intake");
+        claw = hardwareMap.get(Servo.class, "claw");
         armL = hardwareMap.get(Servo.class, "armL");
         armR = hardwareMap.get(Servo.class, "armR");
+
+
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -45,15 +44,9 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
-        LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
-
-
+        LiftLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        LiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
-
         while (opModeIsActive()) {
             if (driveswitch == 0) {
                 motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)));
@@ -81,37 +74,20 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
-            if (gamepad1.right_trigger > 0.5) {
-                intake.setPosition(-1);
-            } else if (gamepad1.left_trigger > 0.5) {
-                intake.setPosition(1);
-            } else {
-            }
-            if (gamepad1.left_bumper) {
-                armR.setPosition(1);
-                armL.setPosition(1);
-            } else if (gamepad1.right_bumper) {
-                armR.setPosition(0);
-                armL.setPosition(0);
-            } else {
-            }
-            if (gamepad2.dpad_up || gamepad1.dpad_up) {
-                LiftLeft.setPower(1);//may need to speed up or slow down
-                LiftRight.setPower(1);
+            if (gamepad1.dpad_right) {
+                LiftLeft.setTargetPosition(1000);
+                LiftRight.setTargetPosition(1000);
+                LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            } else if (gamepad2.dpad_down || gamepad1.dpad_down) {
-                LiftLeft.setPower(-1);//may need speed up or slow down
-                LiftRight.setPower(-1);//may need speed up or slow down
-            } else {
-                LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                LiftLeft.setPower(0);
-                LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                LiftRight.setPower(0);
+            }
+            if (gamepad1.dpad_down){
+                LiftLeft.setPower(-.3);
+                LiftRight.setPower(-.3);
+
             }
         }
+
     }
 }
-
-
-
 
