@@ -45,10 +45,9 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBL.setDirection(DcMotorSimple.Direction.FORWARD);
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
-        LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        armL.setDirection(Servo.Direction.REVERSE);
-        armR.setDirection(Servo.Direction.REVERSE);
+        LiftLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        LiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -82,19 +81,27 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
-           if (gamepad1.dpad_right){
-               robot.LiftSetPosition(200);
+           if (gamepad1.dpad_up){
+               LiftLeft.setPower(.3);
+               LiftRight.setPower(.3);
            }
            if(gamepad1.dpad_down){
-               robot.LiftSetPosition(0);
+            LiftLeft.setPower(-.3);
+            LiftRight.setPower(-.3);
            }
            if(gamepad1.right_bumper){
-               armL.setPosition(.3);
-               armR.setPosition(.3);
+               armL.setPosition(-1);
+               armR.setPosition(-1);
            }
-           if(gamepad1.right_trigger>0.0001){
-                armL.setPosition(0);
-                armR.setPosition(0);
+           if(gamepad1.b){
+                armL.setPosition(1);
+                armR.setPosition(1);
+            }
+           if(gamepad1.left_bumper){
+               claw.setPosition(1);
+           }
+            if(gamepad1.left_trigger>0.4){
+                claw.setPosition(-1);
             }
         }
     }
