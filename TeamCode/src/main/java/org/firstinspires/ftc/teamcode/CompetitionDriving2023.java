@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 public class CompetitionDriving2023 extends LinearOpMode {
 
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
-    public static Servo intake, armL, armR;
+    public static Servo claw, armL, armR;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -27,10 +27,10 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBR = hardwareMap.get(DcMotor.class, "motorBR");
         motorFR = hardwareMap.get(DcMotor.class, "motorFR");
         LiftLeft = hardwareMap.get(DcMotor.class, "LiftLeft");
-        LiftRight = hardwareMap.get(DcMotor.class, "lift2");
+        LiftRight = hardwareMap.get(DcMotor.class, "LiftRight");
 
 
-        intake = hardwareMap.get(Servo.class, "intake");
+        claw = hardwareMap.get(Servo.class, "claw");
         armL = hardwareMap.get(Servo.class, "armL");
         armR = hardwareMap.get(Servo.class, "armR");
 
@@ -47,7 +47,8 @@ public class CompetitionDriving2023 extends LinearOpMode {
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
         LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
-
+        armL.setDirection(Servo.Direction.REVERSE);
+        armR.setDirection(Servo.Direction.REVERSE);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -81,32 +82,19 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
-            if (gamepad1.right_trigger > 0.5) {
-                intake.setPosition(-1);
-            } else if (gamepad1.left_trigger > 0.5) {
-                intake.setPosition(1);
-            } else {
-            }
-            if (gamepad1.left_bumper) {
-                armR.setPosition(1);
-                armL.setPosition(1);
-            } else if (gamepad1.right_bumper) {
-                armR.setPosition(0);
+           if (gamepad1.dpad_right){
+               robot.LiftSetPosition(200);
+           }
+           if(gamepad1.dpad_down){
+               robot.LiftSetPosition(0);
+           }
+           if(gamepad1.right_bumper){
+               armL.setPosition(.3);
+               armR.setPosition(.3);
+           }
+           if(gamepad1.right_trigger>0.0001){
                 armL.setPosition(0);
-            } else {
-            }
-            if (gamepad2.dpad_up || gamepad1.dpad_up) {
-                LiftLeft.setPower(1);//may need to speed up or slow down
-                LiftRight.setPower(1);
-
-            } else if (gamepad2.dpad_down || gamepad1.dpad_down) {
-                LiftLeft.setPower(-1);//may need speed up or slow down
-                LiftRight.setPower(-1);//may need speed up or slow down
-            } else {
-                LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                LiftLeft.setPower(0);
-                LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                LiftRight.setPower(0);
+                armR.setPosition(0);
             }
         }
     }
