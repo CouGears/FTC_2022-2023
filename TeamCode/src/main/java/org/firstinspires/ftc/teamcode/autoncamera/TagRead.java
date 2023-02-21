@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import java.util.ArrayList;
 
-@TeleOp
+//@TeleOp
 public class TagRead extends LinearOpMode {
     public int pos() {
         return position;

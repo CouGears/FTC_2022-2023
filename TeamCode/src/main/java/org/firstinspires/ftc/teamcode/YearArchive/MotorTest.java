@@ -10,11 +10,11 @@ import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
 //uncomment the following to use
-//@TeleOp
+@TeleOp
 public class MotorTest extends LinearOpMode {
 
-    private DcMotor lift1, lift2;
-    private Servo shoulder1, shoulder2;
+    private DcMotor LiftRight, LiftLeft;
+    private Servo armL, armR;
     private AutonMethods robot = new AutonMethods();
 
 
@@ -22,18 +22,18 @@ public class MotorTest extends LinearOpMode {
     public void runOpMode() {
         //region hardware map
         LEDMethods LED = new LEDMethods();
-        lift1 = hardwareMap.get(DcMotor.class, "lift1");
-        lift2 = hardwareMap.get(DcMotor.class, "lift2");
+        LiftLeft = hardwareMap.get(DcMotor.class, "LiftLeft");
+        LiftRight = hardwareMap.get(DcMotor.class, "LiftRight");
 
-        shoulder1 = hardwareMap.get(Servo.class, "shoulder1");
-        shoulder2 = hardwareMap.get(Servo.class, "shoulder2");
+        armR = hardwareMap.get(Servo.class, "armR");
+        armL = hardwareMap.get(Servo.class, "armL");
 
 
-        lift1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lift2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        lift1.setDirection(DcMotorSimple.Direction.FORWARD);
-        lift2.setDirection(DcMotorSimple.Direction.FORWARD);
+        LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
 
@@ -44,57 +44,37 @@ public class MotorTest extends LinearOpMode {
 
         while (opModeIsActive()) {
             if (gamepad1.a) {
-                lift1.setPower(.2);
-                lift2.setPower(.2);
-                telemetry.addData("Lift1 position, Lift2 Position - " + lift1.getCurrentPosition() + "," + lift2.getCurrentPosition(), 0);
+                LiftLeft.setPower(-.2);
+                LiftRight.setPower(-.2);
+                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," , LiftRight.getCurrentPosition());
                 telemetry.update();
             }
             else if (gamepad1.b) {
-                lift1.setPower(.4);
-                lift2.setPower(.4);
-                telemetry.addData("Lift1 position, Lift2 Position - " + lift1.getCurrentPosition() + "," + lift2.getCurrentPosition(), 0);
+                LiftLeft.setPower(.4);
+                LiftRight.setPower(.4);
+                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," , LiftRight.getCurrentPosition());
                 telemetry.update();
             }
             else if (gamepad1.x) {
-                lift1.setPower(.6);
-                lift2.setPower(.6);
-                telemetry.addData("Lift1 position, Lift2 Position - " + lift1.getCurrentPosition() + "," + lift2.getCurrentPosition(), 0);
+                LiftLeft.setPower(.6);
+                LiftRight.setPower(.6);
+                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," + LiftRight.getCurrentPosition(), 0);
                 telemetry.update();
             }
             else if (gamepad1.y) {
-                lift1.setPower(.8);
-                lift2.setPower(.8);
-                telemetry.addData("Lift1 position, Lift2 Position - " + lift1.getCurrentPosition() + "," + lift2.getCurrentPosition(), 0);
+                LiftLeft.setPower(.2);
+                LiftRight.setPower(.2);
+                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," , LiftRight.getCurrentPosition());
                 telemetry.update();
             }
             else{
-                lift1.setPower(0);
-                lift2.setPower(0);
+                LiftRight.setPower(0);
+                LiftLeft.setPower(0);
             }
 
             if(gamepad1.left_bumper)
-            {shoulder1.setPosition(0);shoulder2.setPosition(0);
+            {armR.setPosition(0);armL.setPosition(0);
                 telemetry.addData("Position" , "0");
-                telemetry.update();}
-            if(gamepad1.right_bumper)
-            {shoulder1.setPosition(1);shoulder2.setPosition(1);
-                telemetry.addData("Position" , "1");
-                telemetry.update();}
-            if(gamepad1.dpad_right)
-            {shoulder1.setPosition(0.9);shoulder2.setPosition(0.9);
-                telemetry.addData("Position" , "0.9");
-                telemetry.update();}
-            if(gamepad1.dpad_left)
-            {shoulder1.setPosition(0.2);shoulder2.setPosition(0.2);
-                telemetry.addData("Position" , "0.2");
-                telemetry.update();}
-            if(gamepad1.dpad_up)
-            {shoulder1.setPosition(0.5);shoulder2.setPosition(0.5);
-                telemetry.addData("Position" , "0.5");
-                telemetry.update();}
-            if(gamepad1.dpad_down)
-            {shoulder1.setPosition(0.1);shoulder2.setPosition(0.1);
-                telemetry.addData("Position" , "0.1");
                 telemetry.update();}
         }
     }

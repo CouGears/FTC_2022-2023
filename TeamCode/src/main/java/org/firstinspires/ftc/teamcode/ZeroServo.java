@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 @TeleOp
 public class ZeroServo extends LinearOpMode {
 
-    private Servo servo;
+    private Servo armL, armR;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -21,7 +21,8 @@ public class ZeroServo extends LinearOpMode {
     public void runOpMode() {
         //region hardware map
 
-        servo = hardwareMap.get(Servo.class, "servo");
+        armL = hardwareMap.get(Servo.class, "armL");
+        armR = hardwareMap.get(Servo.class, "armR");
 
 
         telemetry.addData("Status", "Initialized");
@@ -30,11 +31,13 @@ public class ZeroServo extends LinearOpMode {
 
         waitForStart();
 
-        servo.setPosition(0);
+        armL.setPosition(0);
+        armR.setPosition(0);
         telemetry.addData("Status", "Zeroed");
         telemetry.update();
         while (opModeIsActive()) {
-
+            armL.setPosition(0);
+            armR.setPosition(0);
         }
     }
 }

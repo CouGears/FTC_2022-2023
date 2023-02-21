@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 public class CompetitionDriving2023 extends LinearOpMode {
 
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
-    public static Servo claw, armL, armR;
+    public static Servo intake, armL, armR;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
 
@@ -30,7 +30,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
         LiftRight = hardwareMap.get(DcMotor.class, "LiftRight");
 
 
-        claw = hardwareMap.get(Servo.class, "claw");
+        intake = hardwareMap.get(Servo.class, "intake");
         armL = hardwareMap.get(Servo.class, "armL");
         armR = hardwareMap.get(Servo.class, "armR");
 
@@ -85,23 +85,28 @@ public class CompetitionDriving2023 extends LinearOpMode {
                LiftLeft.setPower(.3);
                LiftRight.setPower(.3);
            }
-           if(gamepad1.dpad_down){
+           else if(gamepad1.dpad_down){
             LiftLeft.setPower(-.3);
             LiftRight.setPower(-.3);
            }
+           else
+           {
+               LiftLeft.setPower(0);
+               LiftRight.setPower(0);
+           }
            if(gamepad1.right_bumper){
                armL.setPosition(-1);
-               armR.setPosition(-1);
+               armR.setPosition(1);
            }
-           if(gamepad1.b){
+           else if(gamepad1.b){
                 armL.setPosition(1);
-                armR.setPosition(1);
+                armR.setPosition(-1);
             }
            if(gamepad1.left_bumper){
-               claw.setPosition(1);
+               intake.setPosition(1);
            }
             if(gamepad1.left_trigger>0.4){
-                claw.setPosition(-1);
+                intake.setPosition(-1);
             }
         }
     }
