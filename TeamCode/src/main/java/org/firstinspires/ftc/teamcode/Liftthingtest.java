@@ -16,8 +16,11 @@ public class Liftthingtest extends LinearOpMode {
     public static Servo intake, armL, armR;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
-    public int total = 0;
-    public int topLiftEncoder = 10000;
+    private int topLiftEncoder = 7575;
+    private double bot = 0;
+    private double top = 1;
+    private double right;
+    private double left;
 
     @Override
     public void runOpMode() {
@@ -49,9 +52,12 @@ public class Liftthingtest extends LinearOpMode {
         LiftLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         LiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
+
+        LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-
 
 
         waitForStart();
@@ -82,50 +88,61 @@ public class Liftthingtest extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
-            if (gamepad1.dpad_up){
-                if( LiftLeft.getCurrentPosition() <= topLiftEncoder)
-                {
-                    LiftLeft.setPower(.3);
-                    LiftRight.setPower(.3);
-                    armL.setPosition(robot.maps(LiftLeft.getCurrentPosition(), 0, topLiftEncoder, 0, 1 ));
-                    armR.setPosition(robot.maps(LiftLeft.getCurrentPosition(), 0, topLiftEncoder, 0, (270/180)));
-                }
+            if (gamepad1.dpad_up && LiftRight.getCurrentPosition() <= topLiftEncoder) {
+                LiftLeft.setPower(1);
+                LiftRight.setPower(1);
+                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                //right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Left - Servo", left);
+                telemetry.addLine();
+                telemetry.addData("Right - Servo", -left);
+                telemetry.update();
+                armL.setPosition(left);
+                armR.setPosition(-left);
 
+            } else if (gamepad1.dpad_down && LiftRight.getCurrentPosition() >= 0) {
+                LiftLeft.setPower(-1);
+                LiftRight.setPower(-1);
+                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                //right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Left - Servo", left);
+                telemetry.addLine();
+                telemetry.addData("Right - Servo", -left);
+                telemetry.update();
+                armL.setPosition(left);
+                armR.setPosition(-left);
             }
-            else if(gamepad1.dpad_down){
-                if(LiftLeft.getCurrentPosition()>=0)
-                {
-                    LiftLeft.setPower(-.3);
-                    LiftRight.setPower(-.3);
-                    armL.setPosition(robot.maps(LiftLeft.getCurrentPosition(), 0, topLiftEncoder, 0, 1 ));
-                    armR.setPosition(robot.maps(LiftLeft.getCurrentPosition(), 0, topLiftEncoder, 0, (270/180)));
+                else {
+                    LiftLeft.setPower(0);
+                    LiftRight.setPower(0);
                 }
-
+                /*if (gamepad1.right_bumper) {
+                    armL.setPosition(-1);
+                    armR.setPosition(1);
+                } else if (gamepad1.b) {
+                    armL.setPosition(1);
+                    armR.setPosition(-1);
+                }*/
+                if (gamepad1.left_bumper) {
+                    intake.setPosition(1);
+                }
+                if (gamepad1.left_trigger > 0.4) {
+                    intake.setPosition(-1);
+                }
+                //telemetry.addData("tot", total);
+                //telemetry.update();
             }
-            else
-            {
-                LiftLeft.setPower(0);
-                LiftRight.setPower(0);
-            }
-            if(gamepad1.right_bumper){
-                armL.setPosition(-1);
-                armR.setPosition(1);
-            }
-            else if(gamepad1.b){
-                armL.setPosition(1);
-                armR.setPosition(-1);
-            }
-            if(gamepad1.left_bumper){
-                intake.setPosition(1);
-            }
-            if(gamepad1.left_trigger>0.4){
-                intake.setPosition(-1);
-            }
-            telemetry.addData("tot", total);
-            telemetry.update();
         }
     }
-}
+
 
 
 
