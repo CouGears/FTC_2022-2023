@@ -19,8 +19,8 @@ public class Liftthingtest extends LinearOpMode {
     private int topLiftEncoder = 7575;
     private double bot = 0;
     private double top = 1;
-    private double right;
-    private double left;
+    private double right = 0;
+    private double left = 0;
 
     @Override
     public void runOpMode() {
@@ -92,7 +92,7 @@ public class Liftthingtest extends LinearOpMode {
                 LiftLeft.setPower(1);
                 LiftRight.setPower(1);
                 left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
-                //right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                right = -left;
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
                 telemetry.addLine();
                 telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
@@ -102,13 +102,13 @@ public class Liftthingtest extends LinearOpMode {
                 telemetry.addData("Right - Servo", -left);
                 telemetry.update();
                 armL.setPosition(left);
-                armR.setPosition(-left);
+                armR.setPosition(right);
 
             } else if (gamepad1.dpad_down && LiftRight.getCurrentPosition() >= 0) {
                 LiftLeft.setPower(-1);
                 LiftRight.setPower(-1);
                 left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
-                //right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                right = -left;
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
                 telemetry.addLine();
                 telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
@@ -118,7 +118,7 @@ public class Liftthingtest extends LinearOpMode {
                 telemetry.addData("Right - Servo", -left);
                 telemetry.update();
                 armL.setPosition(left);
-                armR.setPosition(-left);
+                armR.setPosition(right);
             }
                 else {
                     LiftLeft.setPower(0);
