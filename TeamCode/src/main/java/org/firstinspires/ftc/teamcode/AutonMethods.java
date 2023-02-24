@@ -93,6 +93,8 @@ public class AutonMethods {
 
         // release.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
         motorFL.setTargetPosition(0);
         motorBL.setTargetPosition(0);

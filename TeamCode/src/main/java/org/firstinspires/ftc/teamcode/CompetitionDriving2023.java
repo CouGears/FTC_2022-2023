@@ -17,8 +17,10 @@ public class CompetitionDriving2023 extends LinearOpMode {
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
     private int topLiftEncoder = 7475;
-    private double bot = 0;
-    private double top = 1;
+    private double botR = 0.5;
+    private double topR = 1;
+    private double botL = 0.5;
+    private double topL = 0;
     private double right = 0;
     private double left = 0;
 
@@ -37,6 +39,12 @@ public class CompetitionDriving2023 extends LinearOpMode {
         intake = hardwareMap.get(Servo.class, "intake");
         armL = hardwareMap.get(Servo.class, "armL");
         armR = hardwareMap.get(Servo.class, "armR");
+
+        LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -94,11 +102,10 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
                     LiftLeft.setPower(1);
                     LiftRight.setPower(1);
-                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top); /*I suspect the issue with the servos might come from here (it seems that your input and output might be wrong.) What
-                I would suggest doing is is to figure out what the output of the function "maps" is before it even gets to the servo.setPosition. */
-                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, top);;
+                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botL, topL);
+                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);;
                 armL.setPosition(left);
-                armR.setPosition(-right); //this also might be a problem
+                armR.setPosition(right);
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
                 telemetry.addLine();
                 telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
@@ -116,10 +123,10 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 //if(LiftRight.getCurrentPosition() >= 0){
                 LiftLeft.setPower(-1);
                 LiftRight.setPower(-1);
-                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
-                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, top);;
+                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botL, topL);
+                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);;
                 armL.setPosition(left);
-                armR.setPosition(-right);
+                armR.setPosition(right);
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
                 telemetry.addLine();
                 telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
