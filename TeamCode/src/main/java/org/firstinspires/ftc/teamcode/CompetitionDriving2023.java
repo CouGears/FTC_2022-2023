@@ -94,10 +94,11 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
                     LiftLeft.setPower(1);
                     LiftRight.setPower(1);
-                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top); /*I suspect the issue with the servos might come from here (it seems that your input and output might be wrong.) What
+                I would suggest doing is is to figure out what the output of the function "maps" is before it even gets to the servo.setPosition. */
                 right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, top);;
                 armL.setPosition(left);
-                armR.setPosition(-right);
+                armR.setPosition(-right); //this also might be a problem
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
                 telemetry.addLine();
                 telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
