@@ -204,39 +204,17 @@ public class AutonMethods {
             tele.update();
         }
     }
-
-    public void driveWithDecel(double forward, double sideways) {
-        double distd = 8 * feet;
-        runtime.reset();
-        while (motorFR.isBusy() || motorFL.isBusy()) {
-            if (runtime.seconds() > 3) break;
-        }
-        motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        FRtpos = forward - sideways;
-        BRtpos = forward + sideways;
-        FLtpos = forward + sideways;
-        BLtpos = forward - sideways;
-
-        motorFL.setTargetPosition((int) FLtpos);
-        motorBL.setTargetPosition((int) BLtpos);
-        motorFR.setTargetPosition(-(int) FRtpos);
-        motorBR.setTargetPosition(-(int) BRtpos);
-
-        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        speed(1);
-        runtime.reset();
-        while ((motorFR.isBusy() || motorFL.isBusy()) && runtime.seconds() < 3) {
-            motorFL.setPower((((int) FLtpos - motorFL.getCurrentPosition()) / distd) + .2);
-            motorBL.setPower((((int) BLtpos - motorBL.getCurrentPosition()) / distd) + .2);
-            motorFR.setPower(-(((int) FRtpos + motorFR.getCurrentPosition()) / distd) + .2);
-            motorBR.setPower(-(((int) BRtpos + motorBR.getCurrentPosition()) / distd) + .2);
-        }
+    public void lift(double amount) { //moves the 4 bar/lifter
+        // amount = -amount;
+        LiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LiftRight.setTargetPosition((int) amount);
+        LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftRight.setPower(.6);
+        LiftLeft.setPower(.6);
+    }
+    public void dump()
+    {
+        intake.setPosition(-.25);
     }
 }

@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
 //uncomment the following to use
-@TeleOp
+//@TeleOp
 public class MotorTest extends LinearOpMode {
 
     private DcMotor LiftRight, LiftLeft;
@@ -25,57 +25,25 @@ public class MotorTest extends LinearOpMode {
         LiftLeft = hardwareMap.get(DcMotor.class, "LiftLeft");
         LiftRight = hardwareMap.get(DcMotor.class, "LiftRight");
 
-        armR = hardwareMap.get(Servo.class, "armR");
-        armL = hardwareMap.get(Servo.class, "armL");
-
-
         LiftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LiftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         LiftLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         LiftRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
-
-
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
-
         waitForStart();
 
         while (opModeIsActive()) {
             if (gamepad1.a) {
-                LiftLeft.setPower(-.2);
-                LiftRight.setPower(-.2);
-                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," , LiftRight.getCurrentPosition());
-                telemetry.update();
-            }
-            else if (gamepad1.b) {
-                LiftLeft.setPower(.4);
-                LiftRight.setPower(.4);
-                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," , LiftRight.getCurrentPosition());
-                telemetry.update();
-            }
-            else if (gamepad1.x) {
-                LiftLeft.setPower(.6);
-                LiftRight.setPower(.6);
-                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," + LiftRight.getCurrentPosition(), 0);
-                telemetry.update();
-            }
-            else if (gamepad1.y) {
-                LiftLeft.setPower(.2);
-                LiftRight.setPower(.2);
-                telemetry.addData("Lift1 position, Lift2 Position - " + LiftLeft.getCurrentPosition() + "," , LiftRight.getCurrentPosition());
-                telemetry.update();
-            }
-            else{
+                LiftLeft.setPower(-1);
+                LiftRight.setPower(-1);
+            } else if (gamepad1.y) {
+                LiftLeft.setPower(1);
+                LiftRight.setPower(1);
+            } else {
                 LiftRight.setPower(0);
                 LiftLeft.setPower(0);
             }
-
-            if(gamepad1.left_bumper)
-            {armR.setPosition(0);armL.setPosition(0);
-                telemetry.addData("Position" , "0");
-                telemetry.update();}
         }
     }
 }

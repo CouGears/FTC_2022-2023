@@ -16,7 +16,11 @@ public class CompetitionDriving2023 extends LinearOpMode {
     public static Servo intake, armL, armR;
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
-
+    private int topLiftEncoder = 7475;
+    private double bot = 0;
+    private double top = 1;
+    private double right = 0;
+    private double left = 0;
 
     @Override
     public void runOpMode() {
@@ -48,12 +52,17 @@ public class CompetitionDriving2023 extends LinearOpMode {
         LiftLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         LiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
+
+        //LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //LiftLeft.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        //LiftLeft.setMode(DcMotor.RunMode.RESET_ENCODERS);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
 
         waitForStart();
-
         while (opModeIsActive()) {
             if (driveswitch == 0) {
                 motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)));
@@ -81,36 +90,71 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.y) {
                 driveswitch = 0;
             }
-           if (gamepad1.dpad_up){
-               LiftLeft.setPower(.3);
-               LiftRight.setPower(.3);
-           }
-           else if(gamepad1.dpad_down){
-            LiftLeft.setPower(-.3);
-            LiftRight.setPower(-.3);
-           }
-           else
-           {
-               LiftLeft.setPower(0);
-               LiftRight.setPower(0);
-           }
-           if(gamepad1.right_bumper){
-               armL.setPosition(-1);
-               armR.setPosition(1);
-           }
-           else if(gamepad1.b){
-                armL.setPosition(1);
-                armR.setPosition(-1);
-            }
-           if(gamepad1.left_bumper){
-               intake.setPosition(1);
-           }
-            if(gamepad1.left_trigger>0.4){
-                intake.setPosition(-1);
+            if (gamepad1.dpad_up&&LiftRight.getCurrentPosition() <= topLiftEncoder) {
+                //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
+                    LiftLeft.setPower(1);
+                    LiftRight.setPower(1);
+                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, top);;
+                armL.setPosition(left);
+                armR.setPosition(-right);
+                telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Left - Servo", left);
+                telemetry.addLine();
+                telemetry.addData("Right - Servo", right);
+                telemetry.addLine();
+                telemetry.addData("Left - Servo Actual", armL.getPosition());
+                telemetry.addLine();
+                telemetry.addData("Right - Servo Actual", armR.getPosition());
+                telemetry.update();
+                //}
+            } else if (gamepad1.dpad_down&&LiftRight.getCurrentPosition() >= 0) {
+                //if(LiftRight.getCurrentPosition() >= 0){
+                LiftLeft.setPower(-1);
+                LiftRight.setPower(-1);
+                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, -top);
+                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, bot, top);;
+                armL.setPosition(left);
+                armR.setPosition(-right);
+                telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
+                telemetry.addLine();
+                telemetry.addData("Left - Servo", left);
+                telemetry.addLine();
+                telemetry.addData("Right - Servo", right);
+                telemetry.addLine();
+                telemetry.addData("Left - Servo Actual", armL.getPosition());
+                telemetry.addLine();
+                telemetry.addData("Right - Servo Actual", armR.getPosition());
+                telemetry.update();
+            }//}
+                else {
+                    LiftLeft.setPower(0);
+                    LiftRight.setPower(0);
+                }
+                /*if (gamepad1.right_bumper) {
+                    armL.setPosition(-1);
+                    armR.setPosition(1);
+                } else if (gamepad1.b) {
+                    armL.setPosition(1);
+                    armR.setPosition(-1);
+                }*/
+                if (gamepad1.right_trigger > 0.5) {
+                    intake.setPosition(.25);
+                }
+                if (gamepad1.left_trigger > 0.5) {
+                    intake.setPosition(-.25);
+                }
+                //telemetry.addData("tot", total);
+                //telemetry.update();
             }
         }
     }
-}
+
 
 
 

@@ -104,21 +104,27 @@ public class AutonLeft extends OpMode {
                 break;
             case 4:
                 //lift
+                robot.lift(7575);
                 robot.counter++;
                 break;
             case 5:
                 //dump
+                robot.dump();
                 robot.counter++;
                 break;
             case 6:
-                robot.turn(-45);
+                robot.lift(0);
                 robot.counter++;
                 break;
             case 7:
-                robot.drive(0,.25*feet,1);
+                robot.turn(-45);
                 robot.counter++;
                 break;
             case 8:
+                robot.drive(0,.25*feet,1);
+                robot.counter++;
+                break;
+            case 9:
                 if (position == 1) {
                     robot.drive(0, -4 * feet, 1);
                 } else if (position == 2) {
