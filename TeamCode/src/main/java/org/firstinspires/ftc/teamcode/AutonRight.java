@@ -91,7 +91,7 @@ public class AutonRight extends OpMode {
                 break;
 
             case 1:
-                robot.drive(0, 2.5 * feet, 1);
+                robot.drive(0, -2.5 * feet, 1);
                 robot.counter++;
                 break;
             case 2:
@@ -99,12 +99,12 @@ public class AutonRight extends OpMode {
                 robot.counter++;
                 break;
             case 3:
-                robot.turn(45);
+                robot.turn(-45);
                 robot.counter++;
                 break;
             case 4:
                 //lift
-                robot.lift(7575);
+                robot.lift(7475);
                 robot.counter++;
                 break;
             case 5:
@@ -117,18 +117,18 @@ public class AutonRight extends OpMode {
                 robot.counter++;
                 break;
             case 7:
-                robot.turn(-45);
+                robot.turn(45);
                 robot.counter++;
                 break;
             case 8:
-                robot.drive(0,.25*feet,1);
+                robot.drive(0,-.25*feet,1);
                 robot.counter++;
                 break;
             case 9:
                 if (position == 1) {
-                    robot.drive(0, -4 * feet, 1);
+                    robot.drive(0, 4 * feet, 1);
                 } else if (position == 2) {
-                    robot.drive(0, -2 * feet, 1);
+                    robot.drive(0, 2 * feet, 1);
                 } else robot.drive(0, 0, 0);
                 robot.counter++;
                 break;

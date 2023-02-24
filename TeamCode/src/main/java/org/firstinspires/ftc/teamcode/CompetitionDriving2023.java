@@ -17,9 +17,9 @@ public class CompetitionDriving2023 extends LinearOpMode {
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
     private int topLiftEncoder = 7475;
-    private double botR = 0.5;
+    private double botR = 0.73;
     private double topR = 1;
-    private double botL = 0.5;
+    private double botL = 0.27;
     private double topL = 0;
     private double right = 0;
     private double left = 0;
@@ -69,7 +69,8 @@ public class CompetitionDriving2023 extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-
+        //armR.setPosition(.3);
+        //armL.setPosition(.7);
         waitForStart();
         while (opModeIsActive()) {
             if (driveswitch == 0) {
