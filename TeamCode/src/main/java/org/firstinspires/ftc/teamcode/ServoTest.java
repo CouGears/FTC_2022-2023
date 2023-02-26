@@ -1,15 +1,10 @@
 package org.firstinspires.ftc.teamcode;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.AutonMethods;
-import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 //uncomment following line to use
-@TeleOp
+//@TeleOp
 public class ServoTest extends LinearOpMode {
 
     private Servo armL, armR;
@@ -23,7 +18,9 @@ public class ServoTest extends LinearOpMode {
     private double topL = 0;
     private double right = botR;
     private double left = botL;
-
+    private double debounceUp = 0;
+    private double debounceDown = 0;
+    private final ElapsedTime runtime = new ElapsedTime();
     @Override
     public void runOpMode() {
         //region hardware map
@@ -40,11 +37,16 @@ public class ServoTest extends LinearOpMode {
 
         while (opModeIsActive()) {
             if (gamepad1.dpad_up) {
+                if(runtime.seconds()>debounceUp+2){
                 right= right+.01;
                 left=left-.01;
+                debounceUp = runtime.seconds();}
             } else if (gamepad1.dpad_down) {
-                left=left+.01;
-                right=right-.01;
+                if(runtime.seconds()>debounceDown+2) {
+                    left = left + .01;
+                    right = right - .01;
+                    debounceDown = runtime.seconds();
+                }
             }//}
             armL.setPosition(left);
             armR.setPosition(right);

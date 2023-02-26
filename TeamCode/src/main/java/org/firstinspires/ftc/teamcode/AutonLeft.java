@@ -46,7 +46,7 @@ public class AutonLeft extends OpMode {
 //   double rev = 383.6; //435 rpm motor
     double rev = 537.7; //312 rpm motor
     double inch = rev / (3.78 * 3.14);
-    double feet = inch * 12 + (10 * inch);
+    double feet = inch * 12; //+ (10 * inch);
     private int position = 0;
 
     private ElapsedTime runtime = new ElapsedTime();

@@ -38,7 +38,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.autoncamera.TagRead;
 
 //uncomment the following line to use
-//@Autonomous
+@Autonomous
 
 public class AutonTest extends OpMode {
 
@@ -46,7 +46,7 @@ public class AutonTest extends OpMode {
 //   double rev = 383.6; //435 rpm motor
     double rev = 537.7; //312 rpm motor
     double inch = rev / (3.78 * 3.14);
-    double feet = inch * 12 + (10 * inch);
+    double feet = inch * 12; //+ (10 * inch);
     private int position = 0;
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -74,11 +74,11 @@ public class AutonTest extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
-                robot.drive(1*feet,0,.1);
+               // robot.drive(1*feet,0,.1);
                 robot.counter++;
                 break;
             case 1:
-                robot.drive(0*feet,1*feet,.1);
+                robot.drive(0, -1.25 * feet, .5);
                 robot.counter++;
                 break;
         }

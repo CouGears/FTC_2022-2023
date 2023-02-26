@@ -162,8 +162,11 @@ public class AutonMethods {
         motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        double deltaturn = (deg / 360.0) * 21.654 * 3.14 * inch * 2.2;
-
+        double deltaturn = (deg / 360.0) * 18.035 * 3.14 * inch; //* 2.2;
+        motorFL.setTargetPosition(-(int) deltaturn);
+        motorBL.setTargetPosition((int) deltaturn);
+        motorFR.setTargetPosition((int) deltaturn);
+        motorBR.setTargetPosition(-(int) deltaturn);
         motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);

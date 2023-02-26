@@ -17,13 +17,12 @@ public class CompetitionDriving2023 extends LinearOpMode {
     private AutonMethods robot = new AutonMethods();
     public int driveswitch = 1;
     private int topLiftEncoder = 7475;
-    private double botR = 0.73;
-    private double topR = 1;
-    private double botL = 0.27;
+    private double botR = 1;
+    private double topR = 0;
+    private double botL = .35;
     private double topL = 0;
     private double right = 0;
     private double left = 0;
-
     @Override
     public void runOpMode() {
         //region hardware map
@@ -152,6 +151,22 @@ public class CompetitionDriving2023 extends LinearOpMode {
                     armL.setPosition(1);
                     armR.setPosition(-1);
                 }*/
+           /* if(gamepad1.dpad_right)
+            {
+                LiftRight.setPower(1);
+                LiftLeft.setPower(1);
+            }
+else if(gamepad1.dpad_left)
+            {
+                LiftRight.setPower(1);
+                LiftLeft.setPower(1);
+            }
+    else
+            {
+
+                LiftRight.setPower(0);
+                LiftLeft.setPower(0);
+            }*/
                 if (gamepad1.right_trigger > 0.5) {
                     intake.setPosition(.25);
                 }

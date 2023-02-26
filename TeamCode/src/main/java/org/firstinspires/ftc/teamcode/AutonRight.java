@@ -46,7 +46,7 @@ public class AutonRight extends OpMode {
 //   double rev = 383.6; //435 rpm motor
     double rev = 537.7; //312 rpm motor
     double inch = rev / (3.78 * 3.14);
-    double feet = inch * 12 + (10 * inch);
+    double feet = inch * 12; //+ (10 * inch);
     private int position = 0;
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -89,48 +89,52 @@ public class AutonRight extends OpMode {
                 }
                 robot.counter++;
                 break;
-
             case 1:
-                robot.drive(0, -2.5 * feet, 1);
+                robot.drive(.1*feet,0,0.5);
                 robot.counter++;
                 break;
             case 2:
-                robot.drive(1.5 * feet, 0, 1);
+                robot.drive(0, -1.25 * feet, .5);
                 robot.counter++;
                 break;
             case 3:
-                robot.turn(-45);
+                robot.drive(1.9 * feet, 0, .5);
+                robot.sleep(100);
                 robot.counter++;
                 break;
             case 4:
+                robot.turn(-45);
+                robot.counter++;
+                break;
+            case 5:
                 //lift
                 robot.lift(7475);
                 robot.counter++;
                 break;
-            case 5:
+            case 6:
                 //dump
                 robot.dump();
                 robot.counter++;
                 break;
-            case 6:
-                robot.lift(0);
-                robot.counter++;
-                break;
             case 7:
-                robot.turn(45);
+               // robot.turn(45);
                 robot.counter++;
                 break;
             case 8:
-                robot.drive(0,-.25*feet,1);
+               // robot.lift(0);
                 robot.counter++;
                 break;
             case 9:
-                if (position == 1) {
-                    robot.drive(0, 4 * feet, 1);
-                } else if (position == 2) {
-                    robot.drive(0, 2 * feet, 1);
-                } else robot.drive(0, 0, 0);
+                //robot.drive(0,-.25*feet,1);
                 robot.counter++;
+                break;
+            case 10:
+               /* if (position == 1) {
+                    robot.drive(0, 6 * feet, .5);
+                } else if (position == 2) {
+                    robot.drive(0, 4 * feet, .5);
+                } else robot.drive(0, 2*feet, 0);
+                */robot.counter++;
                 break;
         }
     }

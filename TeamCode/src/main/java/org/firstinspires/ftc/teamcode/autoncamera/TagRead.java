@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import java.util.ArrayList;
 
-//@TeleOp
+@TeleOp
 public class TagRead extends LinearOpMode {
     public int pos() {
         return position;
@@ -148,7 +148,13 @@ public class TagRead extends LinearOpMode {
         }
 
         /* Actually do something useful */
-        if (tagOfInterest == null || tagOfInterest.id == lefttag) {
+        if(tagOfInterest == null)
+        {
+            telemetry.addLine("null");
+            telemetry.update();
+            position = 1;
+        }
+        else if (tagOfInterest.id == lefttag) {
             //movement here
             telemetry.addLine("left");
             telemetry.update();
