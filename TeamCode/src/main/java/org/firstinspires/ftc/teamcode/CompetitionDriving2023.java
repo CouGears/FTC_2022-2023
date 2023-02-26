@@ -140,10 +140,21 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 telemetry.addData("Right - Servo Actual", armR.getPosition());
                 telemetry.update();
             }//}
-                else {
-                    LiftLeft.setPower(0);
-                    LiftRight.setPower(0);
+                else if(gamepad1.a){
+                    LiftLeft.setPower(-1);
+                    LiftRight.setPower(-1);
                 }
+                else if(gamepad1.y){
+                    LiftLeft.setPower(1);
+                    LiftLeft.setPower(1);}
+            else{LiftLeft.setPower(0);
+            LiftRight.setPower(0);
+        }
+                if (gamepad1.b)
+                {
+                    armR.setPosition(1);
+                }
+                else if(gamepad1.x) armR.setPosition(0);
                 /*if (gamepad1.right_bumper) {
                     armL.setPosition(-1);
                     armR.setPosition(1);
@@ -168,10 +179,10 @@ else if(gamepad1.dpad_left)
                 LiftLeft.setPower(0);
             }*/
                 if (gamepad1.right_trigger > 0.5) {
-                    intake.setPosition(.25);
+                    intake.setPosition(.35);
                 }
                 if (gamepad1.left_trigger > 0.5) {
-                    intake.setPosition(-.25);
+                    intake.setPosition(0);
                 }
                 //telemetry.addData("tot", total);
                 //telemetry.update();

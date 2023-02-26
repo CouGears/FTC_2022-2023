@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 //uncomment following line to use
-//@TeleOp
+@TeleOp
 public class ZeroServo extends LinearOpMode {
 
     private Servo armL, armR;
@@ -31,13 +31,13 @@ public class ZeroServo extends LinearOpMode {
 
         waitForStart();
 
-        armL.setPosition(0.5);
-        armR.setPosition(0.5);
+        armL.setPosition(0);
+        armR.setPosition(0);
         telemetry.addData("Status", "Zeroed");
         telemetry.update();
         while (opModeIsActive()) {
-            armL.setPosition(0.5);
-            armR.setPosition(0.5);
+            armL.setPosition(0);
+            armR.setPosition(0);
         }
     }
 }
