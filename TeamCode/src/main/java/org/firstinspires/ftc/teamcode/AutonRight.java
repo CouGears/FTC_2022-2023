@@ -99,21 +99,27 @@ public class AutonRight extends OpMode {
                 break;
             case 3:
                 robot.drive(1.9 * feet, 0, .5);
-                robot.sleep(100);
+                //robot.sleep(100);
                 robot.counter++;
                 break;
             case 4:
-                robot.turn(-45);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    tele.addLine("Failed Sleep");
+                    tele.update();
+                }
+                //robot.turn(-45);
                 robot.counter++;
                 break;
             case 5:
                 //lift
-                robot.lift(7475);
+                //robot.lift(7475);
                 robot.counter++;
                 break;
             case 6:
                 //dump
-                robot.dump();
+                //robot.dump();
                 robot.counter++;
                 break;
             case 7:
