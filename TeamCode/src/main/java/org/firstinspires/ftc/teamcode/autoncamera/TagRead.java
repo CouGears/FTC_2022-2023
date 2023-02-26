@@ -24,6 +24,7 @@ package org.firstinspires.ftc.teamcode.autoncamera;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -34,15 +35,20 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import java.util.ArrayList;
 
+
 @TeleOp
+
 public class TagRead extends LinearOpMode {
+    AutonMethods robot = new AutonMethods();
+
     public int pos() {
+        robot.sleep(2000);
         return position;
     }
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
-    private int position = 1;
+    private int position = 0;
     static final double FEET_PER_METER = 3.28084;
 
     // Lens intrinsics
@@ -152,7 +158,7 @@ public class TagRead extends LinearOpMode {
         {
             telemetry.addLine("null");
             telemetry.update();
-            position = 1;
+            position = -1;
         }
         else if (tagOfInterest.id == lefttag) {
             //movement here

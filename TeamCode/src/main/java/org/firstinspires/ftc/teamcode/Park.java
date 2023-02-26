@@ -40,7 +40,7 @@ import org.firstinspires.ftc.teamcode.autoncamera.TagRead;
 
 @Autonomous
 
-public class AutonRight extends OpMode {
+public class Park extends OpMode {
 
     //TensorFlowVision vision = new TensorFlowVision();
 //   double rev = 383.6; //435 rpm motor
@@ -74,73 +74,44 @@ public class AutonRight extends OpMode {
     public void loop() {
         switch (robot.counter) {
             case 0:
+                telemetry.addData("tag.pos",tag.pos());
                 if (tag.pos() == 1) {
                     position = 1;
+                    telemetry.addLine();
                     telemetry.addData("Park Location", "Left");
-                    telemetry.update();
                 } else if (tag.pos() == 2) {
                     position = 2;
+                    telemetry.addLine();
                     telemetry.addData("Park Location", "Middle");
-                    telemetry.update();
                 } else if (tag.pos() == 3) {
                     position = 3;
+                    telemetry.addLine();
                     telemetry.addData("Park Location", "Right");
-                    telemetry.update();
                 }
+                telemetry.update();
                 robot.counter++;
                 break;
             case 1:
-                robot.drive(.1*feet,0,0.5);
+                robot.drive(.1*feet,.5,0.5);
                 robot.counter++;
                 break;
             case 2:
-                robot.drive(0, -1.25 * feet, .5);
+                //robot.drive(0,0.5,.5);
+                telemetry.addData("done","");
+                telemetry.update();
                 robot.counter++;
                 break;
             case 3:
-                robot.drive(1.9 * feet, 0, .5);
-                //robot.sleep(100);
+                robot.drive(2*feet,0,0.5);
                 robot.counter++;
                 break;
             case 4:
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    tele.addLine("Failed Sleep");
-                    tele.update();
-                }
-                robot.turn(-45);
-                robot.counter++;
-                break;
-            case 5:
-                //lift
-                //robot.lift(7475);
-                robot.counter++;
-                break;
-            case 6:
-                //dump
-                //robot.dump();
-                robot.counter++;
-                break;
-            case 7:
-               // robot.turn(45);
-                robot.counter++;
-                break;
-            case 8:
-               // robot.lift(0);
-                robot.counter++;
-                break;
-            case 9:
-                //robot.drive(0,-.25*feet,1);
-                robot.counter++;
-                break;
-            case 10:
-               /* if (position == 1) {
-                    robot.drive(0, 6 * feet, .5);
+                if (position == 1) {
+                    robot.drive(0, 2 * feet, .5);
                 } else if (position == 2) {
-                    robot.drive(0, 4 * feet, .5);
-                } else robot.drive(0, 2*feet, 0);
-                */robot.counter++;
+                    robot.drive(0, 0 * feet, .5);
+                } else robot.drive(0, -1.5*feet, 0);
+                robot.counter++;
                 break;
         }
     }
