@@ -10,7 +10,9 @@ import com.qualcomm.robotcore.hardware.LED;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import java.math.*;
+import java.lang.*;
+import java.util.*;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
@@ -22,11 +24,16 @@ public class AutonMethods {
     }
 
     //Declare and initial variables
-    double rev = 537.7;
-    double inch = rev / (3.5 * 3.14);
+    double rev = 537.7;//revolution of 312 rpm motor
+    double pi = 3.14;
+    double robotWidth = 12.75;
+    double robotLength = 13;
+    double circumscribedDiameter = Math.sqrt(Math.pow(robotLength, 2) + Math.pow(robotWidth, 2));
+    double circumscribedRadius = circumscribedDiameter / 2;
+    double inch = rev / (3.5 * pi);
     double feet = inch * 12;
     double rev2 = 2048;
-    double inch2 = rev2 / (2 * 3.14);
+    double inch2 = rev2 / (2 * pi);
     double feet2 = inch2 * 12;
     double FRtpos, BRtpos, FLtpos, BLtpos;
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
@@ -50,16 +57,8 @@ public class AutonMethods {
         intake.setPosition(a);
     }
 
-    public void setArmPOS(double a) {
-        armL.setPosition(a);
-        armR.setPosition(-1 * a);
-    }
 
     public void init(HardwareMap map, Telemetry tele, boolean auton) {
-        // location[0] = 0;
-        //location[1] = 0;
-
-
         motorFL = map.get(DcMotor.class, "motorFL");
         motorBL = map.get(DcMotor.class, "motorBL");
         motorBR = map.get(DcMotor.class, "motorBR");
@@ -163,7 +162,7 @@ public class AutonMethods {
         motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        double deltaturn = (deg / 360.0) * 18.035 * 3.14 * inch; //* 2.2;
+        double deltaturn = (deg / 360.0) * circumscribedDiameter * pi * inch;
         motorFL.setTargetPosition(-(int) deltaturn);
         motorBL.setTargetPosition((int) deltaturn);
         motorFR.setTargetPosition((int) deltaturn);

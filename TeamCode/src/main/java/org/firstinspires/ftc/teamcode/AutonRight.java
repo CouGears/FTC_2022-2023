@@ -38,7 +38,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.autoncamera.TagRead;
 
 
-@Autonomous
+//@Autonomous
 
 public class AutonRight extends OpMode {
 

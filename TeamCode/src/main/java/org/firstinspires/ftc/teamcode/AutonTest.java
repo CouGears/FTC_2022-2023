@@ -38,7 +38,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.autoncamera.TagRead;
 
 //uncomment the following line to use
-@Autonomous
+//@Autonomous
 
 public class AutonTest extends OpMode {
 
@@ -78,7 +78,7 @@ public class AutonTest extends OpMode {
                 robot.counter++;
                 break;
             case 1:
-                robot.drive(0, -1.25 * feet, .5);
+                robot.drive(0, 2*feet, 0);
                 robot.counter++;
                 break;
         }

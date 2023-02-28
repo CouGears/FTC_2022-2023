@@ -39,17 +39,13 @@ import java.util.ArrayList;
 
 public class Auton2 extends LinearOpMode {
     AutonMethods robot = new AutonMethods();
+
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
     double rev = 537.7; //312 rpm motor
     double inch = rev / (3.78 * 3.14);
     double feet = inch * 12; //+ (10 * inch);
     static final double FEET_PER_METER = 3.28084;
-    enum PARKING_LOCATION{
-        LEFT,
-        MIDDLE,
-        RIGHT
-    };
     // Lens intrinsics
     // UNITS ARE PIXELS
     // NOTE: this calibration is for the C920 webcam at 800x448.
@@ -68,19 +64,6 @@ int position = 1;
     int RIGHT =3;
     AprilTagDetection tagOfInterest = null;
 
-    // TODO: Fix this for real stuff
-    enum State {
-        TRAJECTORY_1,
-        WAIT_1,
-        TRAJECTORY_2,
-        TRAJECTORY_3,
-        TRAJECTORY_4,
-        TRAJECTORY_5,
-        TRAJECTORY_6,
-        PARKING,
-        IDLE
-    }
-    State currentState = State.IDLE;
 
     // Define our start pose
     // This assumes we start at x: 15, y: 10, heading: 180 degrees
@@ -89,6 +72,8 @@ int position = 1;
     public void runOpMode() throws InterruptedException {
         // TODO: Add vision
 
+        robot.init(hardwareMap, telemetry, false);
+        telemetry.addData("Status", "Initialized");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -203,7 +188,7 @@ int position = 1;
         } else if(tagOfInterest.id == MIDDLE) {
             // Park Middle
             position = 2;
-        }else {
+        }else if (tagOfInterest.id == RIGHT){
             // Park Right
             position = 3;
         }
@@ -221,6 +206,9 @@ int position = 1;
             // We essentially define the flow of the state machine through this switch statement
             switch (robot.counter) {
                 case 0:
+
+                    telemetry.addData(String.valueOf(position),"");
+                    telemetry.update();
                     if (position==1) {
                         telemetry.addData("Park Location", "Left");
                         telemetry.update();
@@ -238,16 +226,16 @@ int position = 1;
                     robot.counter++;
                     break;
                 case 2:
-                    robot.drive(0, -1.25 * feet, .5);
+                    robot.drive(0, .5 * feet, .5);
                     robot.counter++;
                     break;
                 case 3:
-                    robot.drive(1.9 * feet, 0, .5);
+                    robot.drive(1.5 * feet, 0, .5);
                     //robot.sleep(100);
                     robot.counter++;
                     break;
                 case 4:
-                    robot.turn(-45);
+                    //robot.turn(-45);
                     robot.counter++;
                     break;
                 case 5:
@@ -273,12 +261,14 @@ int position = 1;
                     robot.counter++;
                     break;
                 case 10:
-               /* if (position == 1) {
-                    robot.drive(0, 6 * feet, .5);
+                if (position == 1) {
+                    robot.drive(0, -2 * feet, .5);
                 } else if (position == 2) {
-                    robot.drive(0, 4 * feet, .5);
-                } else robot.drive(0, 2*feet, 0);
-                */robot.counter++;
+                    robot.drive(0, 0 * feet, .5);
+                } else if(position == 3){
+                    robot.drive(0, 2*feet, 0.5);
+                }
+                robot.counter++;
                     break;
             }
 
@@ -291,6 +281,7 @@ int position = 1;
     }
     void tagToTelemetry(AprilTagDetection detection)
     {
+        position = detection.id;
         telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
         telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
         telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y*FEET_PER_METER));

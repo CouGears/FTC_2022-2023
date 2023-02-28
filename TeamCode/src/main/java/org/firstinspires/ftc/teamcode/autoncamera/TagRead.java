@@ -36,15 +36,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import java.util.ArrayList;
 
 
-@TeleOp
+//@TeleOp
 
 public class TagRead extends LinearOpMode {
-    AutonMethods robot = new AutonMethods();
-
-    public int pos() {
-        robot.sleep(2000);
-        return position;
-    }
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;

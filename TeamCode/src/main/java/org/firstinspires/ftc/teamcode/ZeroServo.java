@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 //uncomment following line to use
-@TeleOp
+//@TeleOp
 public class ZeroServo extends LinearOpMode {
 
     private Servo armL, armR;
