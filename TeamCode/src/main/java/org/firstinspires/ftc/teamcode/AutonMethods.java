@@ -10,9 +10,6 @@ import com.qualcomm.robotcore.hardware.LED;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import java.math.*;
-import java.lang.*;
-import java.util.*;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
@@ -26,13 +23,14 @@ public class AutonMethods {
     //Declare and initial variables
     double rev = 537.7;//revolution of 312 rpm motor
     double pi = 3.14;
+    double wheelDiameter = 3.77953;
     double robotWidth = 12.75;
     double robotLength = 13;
     double circumscribedDiameter = Math.sqrt(Math.pow(robotLength, 2) + Math.pow(robotWidth, 2));
     double circumscribedRadius = circumscribedDiameter / 2;
-    double inch = rev / (3.5 * pi);
+    double inch = rev / (wheelDiameter * pi);
     double feet = inch * 12;
-    double rev2 = 2048;
+    double rev2 = 2048;//revolution of 435 rpm motor
     double inch2 = rev2 / (2 * pi);
     double feet2 = inch2 * 12;
     double FRtpos, BRtpos, FLtpos, BLtpos;
@@ -105,8 +103,8 @@ public class AutonMethods {
 
         int relativeLayoutId = map.appContext.getResources().getIdentifier("RelativeLayout", "id", map.appContext.getPackageName());
 
-        // tele.addData(">", "Gyro Calibrating. Do Not Move!");
-        // tele.update();
+         tele.addData(">", "Gyro Calibrating. Do Not Move!");
+        tele.update();
     }
 
     public void kill() {
@@ -197,7 +195,7 @@ public class AutonMethods {
     public void newSleep(double timeinSeconds) {
         runtime.reset();
         while (runtime.seconds() < timeinSeconds) ;
-
+//do nothing
     }
 
     //Function to have the robot sleep
