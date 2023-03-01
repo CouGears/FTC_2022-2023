@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
+//TODO: Uncomment the following line to use
 @TeleOp
 public class CompetitionDriving2023 extends LinearOpMode {
 
@@ -23,6 +24,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
     private double topL = 0;
     private double right = 0;
     private double left = 0;
+
     @Override
     public void runOpMode() {
         //region hardware map
@@ -34,7 +36,6 @@ public class CompetitionDriving2023 extends LinearOpMode {
         LiftLeft = hardwareMap.get(DcMotor.class, "LiftLeft");
         LiftRight = hardwareMap.get(DcMotor.class, "LiftRight");
 
-
         intake = hardwareMap.get(Servo.class, "intake");
         armL = hardwareMap.get(Servo.class, "armL");
         armR = hardwareMap.get(Servo.class, "armR");
@@ -43,7 +44,6 @@ public class CompetitionDriving2023 extends LinearOpMode {
         LiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
 
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -59,17 +59,9 @@ public class CompetitionDriving2023 extends LinearOpMode {
         LiftLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         LiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
-
-        //LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //LiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //LiftLeft.setMode(DcMotor.RunMode.RESET_ENCODERS);
-        //LiftLeft.setMode(DcMotor.RunMode.RESET_ENCODERS);
-
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        //armR.setPosition(.3);
-        //armL.setPosition(.7);
         waitForStart();
         while (opModeIsActive()) {
             if (driveswitch == 0) {
@@ -92,18 +84,19 @@ public class CompetitionDriving2023 extends LinearOpMode {
             if (gamepad1.a) {
                 driveswitch = 2;
             }
-            if (gamepad1.x) {
+            else if (gamepad1.x) {
                 driveswitch = 1;
             }
-            if (gamepad1.y) {
+           else if (gamepad1.y) {
                 driveswitch = 0;
             }
-            if (gamepad1.dpad_up&&LiftRight.getCurrentPosition() <= topLiftEncoder) {
+            if (gamepad1.dpad_up && LiftRight.getCurrentPosition() <= topLiftEncoder) {
                 //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
-                    LiftLeft.setPower(1);
-                    LiftRight.setPower(1);
+                LiftLeft.setPower(1);
+                LiftRight.setPower(1);
                 left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botL, topL);
-                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);;
+                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);
+                ;
                 armL.setPosition(left);
                 armR.setPosition(right);
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
@@ -119,12 +112,13 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 telemetry.addData("Right - Servo Actual", armR.getPosition());
                 telemetry.update();
                 //}
-            } else if (gamepad1.dpad_down&&LiftRight.getCurrentPosition() >= 0) {
+            } else if (gamepad1.dpad_down && LiftRight.getCurrentPosition() >= 0) {
                 //if(LiftRight.getCurrentPosition() >= 0){
                 LiftLeft.setPower(-1);
                 LiftRight.setPower(-1);
                 left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botL, topL);
-                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);;
+                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);
+                ;
                 armL.setPosition(left);
                 armR.setPosition(right);
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
@@ -139,56 +133,19 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 telemetry.addLine();
                 telemetry.addData("Right - Servo Actual", armR.getPosition());
                 telemetry.update();
-            }//}
-                else if(gamepad1.a){
-                    LiftLeft.setPower(-1);
-                    LiftRight.setPower(-1);
-                }
-                else if(gamepad1.y){
-                    LiftLeft.setPower(1);
-                    LiftLeft.setPower(1);}
-            else{LiftLeft.setPower(0);
-            LiftRight.setPower(0);
-        }
-                if (gamepad1.b)
-                {
-                    armR.setPosition(1);
-                }
-                else if(gamepad1.x) armR.setPosition(0);
-                /*if (gamepad1.right_bumper) {
-                    armL.setPosition(-1);
-                    armR.setPosition(1);
-                } else if (gamepad1.b) {
-                    armL.setPosition(1);
-                    armR.setPosition(-1);
-                }*/
-           /* if(gamepad1.dpad_right)
-            {
-                LiftRight.setPower(1);
-                LiftLeft.setPower(1);
             }
-else if(gamepad1.dpad_left)
-            {
-                LiftRight.setPower(1);
-                LiftLeft.setPower(1);
-            }
-    else
-            {
-
-                LiftRight.setPower(0);
+            else {
                 LiftLeft.setPower(0);
-            }*/
-                if (gamepad1.right_trigger > 0.5) {
-                    intake.setPosition(.35);
-                }
-                else if (gamepad1.left_trigger > 0.5) {
-                    intake.setPosition(0);
-                }
-                //telemetry.addData("tot", total);
-                //telemetry.update();
+                LiftRight.setPower(0);
+            }
+            if (gamepad1.right_trigger > 0.5) {
+                intake.setPosition(.35);
+            } else if (gamepad1.left_trigger > 0.5) {
+                intake.setPosition(0);
             }
         }
     }
+}
 
 
 

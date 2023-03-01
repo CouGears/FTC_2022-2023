@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.*;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -13,7 +14,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-public class AutonMethods {
+public class AutonMethods{
 
     //Constructor
     public AutonMethods() {
@@ -21,19 +22,19 @@ public class AutonMethods {
     }
 
     //Declare and initial variables
-    double rev = 537.7;//revolution of 312 rpm motor
-    double pi = 3.14;
-    double wheelDiameter = 3.77953;
-    double robotWidth = 12.75;
-    double robotLength = 13;
-    double circumscribedDiameter = Math.sqrt(Math.pow(robotLength, 2) + Math.pow(robotWidth, 2));
-    double circumscribedRadius = circumscribedDiameter / 2;
-    double inch = rev / (wheelDiameter * pi);
-    double feet = inch * 12;
-    double rev2 = 2048;//revolution of 435 rpm motor
-    double inch2 = rev2 / (2 * pi);
-    double feet2 = inch2 * 12;
-    double FRtpos, BRtpos, FLtpos, BLtpos;
+    private double rev = 537.7;//revolution of 312 rpm motor , find at https://www.gobilda.com/5202-series-yellow-jacket-planetary-gear-motor-19-2-1-ratio-24mm-length-6mm-d-shaft-312-rpm-36mm-gearbox-3-3-5v-encoder/  called encoder resolution
+    private double pi = 3.14;
+    private double wheelDiameter = 3.77953;//inch
+    private double robotWidth = 12.75;//inch
+    private double robotLength = 13;//inch
+    private double circumscribedDiameter = Math.sqrt(Math.pow(robotLength, 2) + Math.pow(robotWidth, 2));//inch
+    private double circumscribedRadius = circumscribedDiameter / 2;//inch
+    private double inch = rev / (wheelDiameter * pi);
+    private double feet = inch * 12;
+    private double rev2 = 2048;//revolution of 435 rpm motor
+    private double inch2 = rev2 / (2 * pi);
+    private double feet2 = inch2 * 12;
+    private double FRtpos, BRtpos, FLtpos, BLtpos;
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
     //public static DcMotor Forwards = intake, Sideways = carousel;
     public static Servo intake, armL, armR;
@@ -44,7 +45,7 @@ public class AutonMethods {
     public static int Case = 0;
     HardwareMap map;
     Telemetry tele;
-    public int counter = 0;
+    public static int counter = 0;
 
     public static BNO055IMU imu;
     BNO055IMU.Parameters parameters;
@@ -149,6 +150,12 @@ public class AutonMethods {
 
         speed(speed);
     }
+    public void speed(double spee) {
+        motorFL.setPower(spee);
+        motorBL.setPower(spee);
+        motorFR.setPower(spee);
+        motorBR.setPower(spee);
+    }
 
 
     //circumscribed robot has a diameter of 21 inches
@@ -185,12 +192,6 @@ public class AutonMethods {
         LiftRight.setPower(1);
     }
 //
-    public void speed(double spee) {
-        motorFL.setPower(spee);
-        motorBL.setPower(spee);
-        motorFR.setPower(spee);
-        motorBR.setPower(spee);
-    }
 
     public void newSleep(double timeinSeconds) {
         runtime.reset();

@@ -39,12 +39,11 @@ import java.util.ArrayList;
 
 public class Auton2 extends LinearOpMode {
     AutonMethods robot = new AutonMethods();
-
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
     double rev = 537.7; //312 rpm motor
     double inch = rev / (3.78 * 3.14);
-    double feet = inch * 12; //+ (10 * inch);
+    double feet = inch * 12;
     static final double FEET_PER_METER = 3.28084;
     // Lens intrinsics
     // UNITS ARE PIXELS
@@ -54,14 +53,14 @@ public class Auton2 extends LinearOpMode {
     double fy = 578.272;
     double cx = 402.145;
     double cy = 221.506;
-int position = 1;
+    int position = 1;
     // UNITS ARE METERS
     double tagsize = 0.166;
 
     // Tag ID 1,2,3 from the 36h11 family
     int LEFT = 1;
     int MIDDLE = 2;
-    int RIGHT =3;
+    int RIGHT = 3;
     AprilTagDetection tagOfInterest = null;
 
 
@@ -70,8 +69,6 @@ int position = 1;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        // TODO: Add vision
-
         robot.init(hardwareMap, telemetry, false);
         telemetry.addData("Status", "Initialized");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -79,77 +76,53 @@ int position = 1;
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
-                camera.startStreaming(640,480, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened() {
+                camera.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
-            public void onError(int errorCode)
-            {}
+            public void onError(int errorCode) {
+            }
         });
 
         telemetry.setMsTransmissionInterval(50);
 
-
-
-
-        /*
-         * The INIT-loop:
-         * This REPLACES waitForStart!
-         */
-        while (!isStarted() && !isStopRequested())
-        {
+        while (!isStarted() && !isStopRequested()) {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 
-            if(currentDetections.size() != 0)
-            {
+            if (currentDetections.size() != 0) {
                 boolean tagFound = false;
 
-                for(AprilTagDetection tag : currentDetections)
-                {
-                    if(tag.id == LEFT || tag.id == MIDDLE || tag.id == RIGHT)
-                    {
+                for (AprilTagDetection tag : currentDetections) {
+                    if (tag.id == LEFT || tag.id == MIDDLE || tag.id == RIGHT) {
                         tagOfInterest = tag;
                         tagFound = true;
                         break;
                     }
                 }
 
-                if(tagFound)
-                {
+                if (tagFound) {
                     telemetry.addLine("Tag of interest is in sight!\n\nLocation data:");
                     tagToTelemetry(tagOfInterest);
-                }
-                else
-                {
+                } else {
                     telemetry.addLine("Don't see tag of interest :(");
 
-                    if(tagOfInterest == null)
-                    {
+                    if (tagOfInterest == null) {
                         telemetry.addLine("(The tag has never been seen)");
-                    }
-                    else
-                    {
+                    } else {
                         telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
                         tagToTelemetry(tagOfInterest);
                     }
                 }
 
-            }
-            else
-            {
+            } else {
                 telemetry.addLine("Don't see tag of interest :(");
 
-                if(tagOfInterest == null)
-                {
+                if (tagOfInterest == null) {
                     telemetry.addLine("(The tag has never been seen)");
-                }
-                else
-                {
+                } else {
                     telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
                     tagToTelemetry(tagOfInterest);
                 }
@@ -166,14 +139,11 @@ int position = 1;
          */
 
         /* Update the telemetry */
-        if(tagOfInterest != null)
-        {
+        if (tagOfInterest != null) {
             telemetry.addLine("Tag snapshot:\n");
             tagToTelemetry(tagOfInterest);
             telemetry.update();
-        }
-        else
-        {
+        } else {
             telemetry.addLine("No tag snapshot available, it was never sighted during the init loop :(");
             telemetry.update();
         }
@@ -182,13 +152,13 @@ int position = 1;
 
 
         /* Actually do something useful */
-        if(tagOfInterest == null || tagOfInterest.id == LEFT){
+        if (tagOfInterest == null || tagOfInterest.id == LEFT) {
             // Park Left
-            position=1;
-        } else if(tagOfInterest.id == MIDDLE) {
+            position = 1;
+        } else if (tagOfInterest.id == MIDDLE) {
             // Park Middle
             position = 2;
-        }else if (tagOfInterest.id == RIGHT){
+        } else if (tagOfInterest.id == RIGHT) {
             // Park Right
             position = 3;
         }
@@ -198,31 +168,30 @@ int position = 1;
         // Start is now pressed!
 
 
-
         // FSM
         while (opModeIsActive() && !isStopRequested()) {
 
             // Our state machine logic
             // We essentially define the flow of the state machine through this switch statement
             switch (robot.counter) {
+                //TODO: Write your Auton HERE
                 case 0:
-
-                    telemetry.addData(String.valueOf(position),"");
+                    telemetry.addData(String.valueOf(position), "");
                     telemetry.update();
-                    if (position==1) {
+                    if (position == 1) {
                         telemetry.addData("Park Location", "Left");
                         telemetry.update();
-                    } else if (position==2) {
+                    } else if (position == 2) {
                         telemetry.addData("Park Location", "Middle");
                         telemetry.update();
-                    } else if (position ==3) {
+                    } else if (position == 3) {
                         telemetry.addData("Park Location", "Right");
                         telemetry.update();
                     }
                     robot.counter++;
                     break;
                 case 1:
-                    robot.drive(.1*feet,0,0.5);
+                    robot.drive(.1 * feet, 0, 0.5);
                     robot.counter++;
                     break;
                 case 2:
@@ -261,14 +230,18 @@ int position = 1;
                     robot.counter++;
                     break;
                 case 10:
-                if (position == 1) {
-                    robot.drive(0, -2 * feet, .5);
-                } else if (position == 2) {
-                    robot.drive(0, 0 * feet, .5);
-                } else if(position == 3){
-                    robot.drive(0, 2*feet, 0.5);
-                }
-                robot.counter++;
+                    if (position == 1) {
+                        robot.drive(0, -2 * feet, .5);
+                    } else if (position == 2) {
+                        robot.drive(0, 0 * feet, .5);
+                    } else if (position == 3) {
+                        robot.drive(0, 2 * feet, 0.5);
+                    }
+                    robot.counter++;
+                    break;
+                case 11:
+                    camera.stopStreaming();
+                    robot.counter++;
                     break;
             }
 
@@ -276,16 +249,15 @@ int position = 1;
             // We update drive continuously in the background, regardless of state
 
 
-
         }
     }
-    void tagToTelemetry(AprilTagDetection detection)
-    {
+
+    void tagToTelemetry(AprilTagDetection detection) {
         position = detection.id;
         telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
-        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
-        telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y*FEET_PER_METER));
-        telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z*FEET_PER_METER));
+        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x * FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y * FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z * FEET_PER_METER));
         telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", Math.toDegrees(detection.pose.yaw)));
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
