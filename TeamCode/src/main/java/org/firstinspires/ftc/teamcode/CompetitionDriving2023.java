@@ -70,7 +70,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
             } else if (driveswitch == 1) {
                 speed = .66;
             } else if (driveswitch == 2) {
-                speed = .33;
+                speed = .333;
             }
 
             motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * speed);
