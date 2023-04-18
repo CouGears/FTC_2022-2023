@@ -64,23 +64,18 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
+            double speed = 1;
             if (driveswitch == 0) {
-                motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)));
-                motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)));
-                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)));
-                motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)));
-
+                speed = 1;
             } else if (driveswitch == 1) {
-                motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * .6);
-                motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * .6);
-                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .6);
-                motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .6);
+                speed = .66;
             } else if (driveswitch == 2) {
-                motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * .33);
-                motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * .33);
-                motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .33);
-                motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * .33);
+                speed = .33;
             }
+            motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * speed);
+            motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * speed);
+            motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * speed);
+            motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * speed);
             if (gamepad1.a) {
                 driveswitch = 2;
             }
@@ -99,6 +94,14 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 ;
                 armL.setPosition(left);
                 armR.setPosition(right);
+                telemetry.addData("Left Stick - X Pos", this.gamepad1.left_stick_x);
+                telemetry.addLine();
+                telemetry.addData("Left Stick - Y Pos", this.gamepad1.left_stick_y);
+                telemetry.addLine();
+                telemetry.addData("Right Stick - X Pos", this.gamepad1.right_stick_x);
+                telemetry.addLine();
+                telemetry.addData("Right Stick - Y Pos", this.gamepad1.right_stick_y);
+                telemetry.addLine();
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
                 telemetry.addLine();
                 telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
@@ -111,6 +114,7 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 telemetry.addLine();
                 telemetry.addData("Right - Servo Actual", armR.getPosition());
                 telemetry.update();
+
                 //}
             } else if (gamepad1.dpad_down && LiftRight.getCurrentPosition() >= 0) {
                 //if(LiftRight.getCurrentPosition() >= 0){
@@ -121,6 +125,14 @@ public class CompetitionDriving2023 extends LinearOpMode {
                 ;
                 armL.setPosition(left);
                 armR.setPosition(right);
+                telemetry.addData("Left Stick - X Pos", this.gamepad1.left_stick_x);
+                telemetry.addLine();
+                telemetry.addData("Left Stick - Y Pos", this.gamepad1.left_stick_y);
+                telemetry.addLine();
+                telemetry.addData("Right Stick - X Pos", this.gamepad1.right_stick_x);
+                telemetry.addLine();
+                telemetry.addData("Right Stick - Y Pos", this.gamepad1.right_stick_y);
+                telemetry.addLine();
                 telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
                 telemetry.addLine();
                 telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
