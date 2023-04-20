@@ -101,13 +101,12 @@ public class FunDriving_Liftless extends LinearOpMode {
            else if (gamepad1.y) {
                 driveswitch = 0;
             }
-           else if (gamepad1.b) {
-                if (binaryarmmovement){
-                    binaryarmmovement = false;
-                }
-                else{
-                    binaryarmmovement = true;
-                }
+           if (gamepad1.right_bumper) {
+               binaryarmmovement = false;
+           }
+           else if(gamepad1.left_bumper){
+               binaryarmmovement = true;
+           }
             }
             if (gamepad1.dpad_up) {
                 //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
