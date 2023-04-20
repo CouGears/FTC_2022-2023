@@ -27,8 +27,9 @@ public class FunDriving_Liftless extends LinearOpMode {
     private double topL = 0;
     private double right = 0;
     private double left = 0;
-    public void TelemetryUpdate(){
-        telemetry.addData("Drive Switch",driveswitch);
+
+    public void TelemetryUpdate() {
+        telemetry.addData("Drive Switch", driveswitch);
         telemetry.addLine();
         telemetry.addData("Binary Arm Movememt", binaryarmmovement);
         telemetry.addLine();
@@ -39,6 +40,7 @@ public class FunDriving_Liftless extends LinearOpMode {
         telemetry.addData("Right - Servo Actual", armR.getPosition());
         telemetry.update();
     }
+
     @Override
     public void runOpMode() {
         //region hardware map
@@ -94,47 +96,40 @@ public class FunDriving_Liftless extends LinearOpMode {
             motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * speed);
             if (gamepad1.a) {
                 driveswitch = 2;
-            }
-            else if (gamepad1.x) {
+            } else if (gamepad1.x) {
                 driveswitch = 1;
-            }
-           else if (gamepad1.y) {
+            } else if (gamepad1.y) {
                 driveswitch = 0;
             }
-           if (gamepad1.right_bumper) {
-               binaryarmmovement = false;
-           }
-           else if(gamepad1.left_bumper){
-               binaryarmmovement = true;
-           }
+            if (gamepad1.right_bumper) {
+                binaryarmmovement = false;
+            } else if (gamepad1.left_bumper) {
+                binaryarmmovement = true;
             }
             if (gamepad1.dpad_up) {
                 //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
-                if (binaryarmmovement == false&& armPos<=1){
+                if (binaryarmmovement == false && armPos <= 1) {
                     armPos += .01;
-                    OtherarmPos = 1-armPos;
-                }
-                else{
-                    armPos=1;
-                    OtherarmPos=0;
+                    OtherarmPos = 1 - armPos;
+                } else {
+                    armPos = 1;
+                    OtherarmPos = 0;
                 }
                 armL.setPosition(armPos);
                 armR.setPosition(OtherarmPos);
 
                 //}
             } else if (gamepad1.dpad_down) {
-                if (binaryarmmovement == false && armPos>=0){
+                if (binaryarmmovement == false && armPos >= 0) {
                     armPos -= .01;
-                    OtherarmPos = 1-armPos;
-                }
-                else{
-                    armPos=0;
-                    OtherarmPos=1;
+                    OtherarmPos = 1 - armPos;
+                } else {
+                    armPos = 0;
+                    OtherarmPos = 1;
                 }
                 armL.setPosition(armPos);
                 armR.setPosition(OtherarmPos);
-            }
-            else {
+            } else {
                 LiftLeft.setPower(0);
                 LiftRight.setPower(0);
             }
