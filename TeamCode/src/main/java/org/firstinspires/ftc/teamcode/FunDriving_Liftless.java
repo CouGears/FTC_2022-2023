@@ -4,19 +4,22 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.*;
+import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.AutonMethods;
 import org.firstinspires.ftc.teamcode.SensorSet.LEDMethods;
 
 //TODO: Uncomment the following line to use
 @TeleOp
-public class CompetitionDriving2023 extends LinearOpMode {
+public class FunDriving_Liftless extends LinearOpMode {
 
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
     public static Servo intake, armL, armR;
+
     private AutonMethods robot = new AutonMethods();
-    public int driveswitch = 1;
+    public int driveswitch = 2;
+    public double armPos = .5;
+    public boolean binaryarmmovement = false;
+    public double OtherarmPos = .5;
     private int topLiftEncoder = 7475;
     private double botR = 1;
     private double topR = 0;
@@ -24,7 +27,18 @@ public class CompetitionDriving2023 extends LinearOpMode {
     private double topL = 0;
     private double right = 0;
     private double left = 0;
-
+    public void TelemetryUpdate(){
+        telemetry.addData("Drive Switch",driveswitch);
+        telemetry.addLine();
+        telemetry.addData("Binary Arm Movememt", binaryarmmovement);
+        telemetry.addLine();
+        telemetry.addData("armPos - Variable", armPos);
+        telemetry.addLine();
+        telemetry.addData("Left - Servo Actual", armL.getPosition());
+        telemetry.addLine();
+        telemetry.addData("Right - Servo Actual", armR.getPosition());
+        telemetry.update();
+    }
     @Override
     public void runOpMode() {
         //region hardware map
@@ -64,13 +78,14 @@ public class CompetitionDriving2023 extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
+            TelemetryUpdate();
             double speed = 1;
             if (driveswitch == 0) {
-                speed = 1;
-            } else if (driveswitch == 1) {
-                speed = .66;
-            } else if (driveswitch == 2) {
                 speed = .333;
+            } else if (driveswitch == 1) {
+                speed = .666;
+            } else if (driveswitch == 2) {
+                speed = 1;
             }
 
             motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * speed);
@@ -86,66 +101,39 @@ public class CompetitionDriving2023 extends LinearOpMode {
            else if (gamepad1.y) {
                 driveswitch = 0;
             }
-            if (gamepad1.dpad_up && LiftRight.getCurrentPosition() <= topLiftEncoder) {
+           else if (gamepad1.b) {
+                if (binaryarmmovement){
+                    binaryarmmovement = false;
+                }
+                else{
+                    binaryarmmovement = true;
+                }
+            }
+            if (gamepad1.dpad_up) {
                 //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
-                LiftLeft.setPower(1);
-                LiftRight.setPower(1);
-                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botL, topL);
-                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);
-                ;
-                armL.setPosition(left);
-                armR.setPosition(right);
-                telemetry.addData("Left Stick - X Pos", this.gamepad1.left_stick_x);
-                telemetry.addLine();
-                telemetry.addData("Left Stick - Y Pos", this.gamepad1.left_stick_y);
-                telemetry.addLine();
-                telemetry.addData("Right Stick - X Pos", this.gamepad1.right_stick_x);
-                telemetry.addLine();
-                telemetry.addData("Right Stick - Y Pos", this.gamepad1.right_stick_y);
-                telemetry.addLine();
-                telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
-                telemetry.addLine();
-                telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
-                telemetry.addLine();
-                telemetry.addData("Left - Servo", left);
-                telemetry.addLine();
-                telemetry.addData("Right - Servo", right);
-                telemetry.addLine();
-                telemetry.addData("Left - Servo Actual", armL.getPosition());
-                telemetry.addLine();
-                telemetry.addData("Right - Servo Actual", armR.getPosition());
-                telemetry.update();
+                if (binaryarmmovement == false){
+                    armPos += .1;
+                    OtherarmPos = 1-armPos;
+                }
+                else{
+                    armPos=1;
+                    OtherarmPos=0;
+                }
+                armL.setPosition(armPos);
+                armR.setPosition(OtherarmPos);
 
                 //}
-            } else if (gamepad1.dpad_down && LiftRight.getCurrentPosition() >= 0) {
-                //if(LiftRight.getCurrentPosition() >= 0){
-                LiftLeft.setPower(-1);
-                LiftRight.setPower(-1);
-                left = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botL, topL);
-                right = robot.maps(LiftRight.getCurrentPosition(), 0, topLiftEncoder, botR, topR);
-                ;
-                armL.setPosition(left);
-                armR.setPosition(right);
-                telemetry.addData("Left Stick - X Pos", this.gamepad1.left_stick_x);
-                telemetry.addLine();
-                telemetry.addData("Left Stick - Y Pos", this.gamepad1.left_stick_y);
-                telemetry.addLine();
-                telemetry.addData("Right Stick - X Pos", this.gamepad1.right_stick_x);
-                telemetry.addLine();
-                telemetry.addData("Right Stick - Y Pos", this.gamepad1.right_stick_y);
-                telemetry.addLine();
-                telemetry.addData("Left - motor", LiftLeft.getCurrentPosition());
-                telemetry.addLine();
-                telemetry.addData("Right - motor", LiftRight.getCurrentPosition());
-                telemetry.addLine();
-                telemetry.addData("Left - Servo", left);
-                telemetry.addLine();
-                telemetry.addData("Right - Servo", right);
-                telemetry.addLine();
-                telemetry.addData("Left - Servo Actual", armL.getPosition());
-                telemetry.addLine();
-                telemetry.addData("Right - Servo Actual", armR.getPosition());
-                telemetry.update();
+            } else if (gamepad1.dpad_down) {
+                if (binaryarmmovement == false){
+                    armPos -= .1;
+                    OtherarmPos = 1-armPos;
+                }
+                else{
+                    armPos=0;
+                    OtherarmPos=1;
+                }
+                armL.setPosition(armPos);
+                armR.setPosition(OtherarmPos);
             }
             else {
                 LiftLeft.setPower(0);
