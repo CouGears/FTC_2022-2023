@@ -16,9 +16,9 @@ public class FunDriving_Liftless extends LinearOpMode {
     public static Servo intake, armL, armR;
 
     private AutonMethods robot = new AutonMethods();
-    public int driveswitch = 2;
+    public int driveswitch = 1;
     public double armPos = .5;
-    public boolean binaryarmmovement = false;
+    public boolean binaryarmmovement = true;
     public double OtherarmPos = .5;
     private int topLiftEncoder = 7475;
     private double botR = 1;
@@ -89,8 +89,8 @@ public class FunDriving_Liftless extends LinearOpMode {
             }
 
             motorFL.setPower(((this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) + ((this.gamepad1.left_stick_y)) - (this.gamepad1.left_stick_x)) * speed);
-            motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * speed*.67);
-            motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * speed*.67);
+            motorBL.setPower(-(-(this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) - (this.gamepad1.left_stick_x)) * speed);
+            motorBR.setPower((-(this.gamepad1.right_stick_y) - (this.gamepad1.right_stick_x) - (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * speed);
             motorFR.setPower(-((this.gamepad1.right_stick_y) + (this.gamepad1.right_stick_x) + (this.gamepad1.left_stick_y) + (this.gamepad1.left_stick_x)) * speed);
             if (gamepad1.a) {
                 driveswitch = 2;
@@ -111,8 +111,8 @@ public class FunDriving_Liftless extends LinearOpMode {
             }
             if (gamepad1.dpad_up) {
                 //if(LiftRight.getCurrentPosition() <= topLiftEncoder) {
-                if (binaryarmmovement == false){
-                    armPos += .1;
+                if (binaryarmmovement == false&& armPos<=1){
+                    armPos += .01;
                     OtherarmPos = 1-armPos;
                 }
                 else{
@@ -124,8 +124,8 @@ public class FunDriving_Liftless extends LinearOpMode {
 
                 //}
             } else if (gamepad1.dpad_down) {
-                if (binaryarmmovement == false){
-                    armPos -= .1;
+                if (binaryarmmovement == false && armPos>=0){
+                    armPos -= .01;
                     OtherarmPos = 1-armPos;
                 }
                 else{
