@@ -34,6 +34,12 @@ public class AutonMethods{
     private double rev2 = 2048;//revolution of 435 rpm motor
     private double inch2 = rev2 / (2 * pi);
     private double feet2 = inch2 * 12;
+
+    private int topLiftEncoder = 7475;
+    private double botR = 1;
+    private double topR = 0;
+    private double botL = .35;
+    private double topL = 0;
     private double FRtpos, BRtpos, FLtpos, BLtpos;
     public static DcMotor motorBR, motorBL, motorFL, motorFR, LiftRight, LiftLeft;
     //public static DcMotor Forwards = intake, Sideways = carousel;
@@ -191,6 +197,23 @@ public class AutonMethods{
         LiftLeft.setPower(1);
         LiftRight.setPower(1);
     }
+    public void LiftArmSetPosition(int position) {
+        LiftLeft.setTargetPosition(position);
+        LiftRight.setTargetPosition(position);
+        LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftLeft.setPower(1);
+        LiftRight.setPower(1);
+        double left = maps(LiftLeft.getCurrentPosition(), 0, topLiftEncoder, botL, topL);
+        double right = maps(LiftLeft.getCurrentPosition(), 0, topLiftEncoder, botR, topR);
+        armL.setPosition(left);
+        armR.setPosition(right);
+    }
+    public int LiftGetPosition() {
+        int leftPosition = LiftLeft.getCurrentPosition();
+        return (leftPosition);
+    }
+
 //
 
     public void newSleep(double timeinSeconds) {
